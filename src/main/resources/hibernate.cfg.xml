@@ -1,0 +1,25 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/cuttingboard</property>
+		<property name="hibernate.default_schema">"public"</property>
+		
+		<!-- SQL Dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+		<property name="show_sql">true</property>
+		
+		<property name="hbm2ddl.auto">validate</property>
+		
+		<mapping class="com.revature.cuttingboard.model.SystemUser"/>
+		<mapping class="com.revature.cuttingboard.model.Recipe"/>
+		<mapping class="com.revature.cuttingboard.model.Category"/>
+		<mapping class="com.revature.cuttingboard.model.Ingredients"/>
+		<mapping class="com.revature.cuttingboard.model.Amount"/>
+		<mapping class="com.revature.cuttingboard.model.Instructions"/>
+	
+	</session-factory>
+</hibernate-configuration>	
