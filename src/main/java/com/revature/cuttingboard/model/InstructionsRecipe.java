@@ -14,36 +14,34 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * Model class to represent the recipe table in the database
+ * Model class to represent the instructions_recipe table of the database
  * @author nom.com
  * @since 1.0
+ *
  */
-
 @Entity
-@Table(name="recipe")
-public class Recipe {
+@Table(name="instructions_recipe")
+public class InstructionsRecipe {
 
 	@Id
-	@Column(name="recipe_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="instructions_recipe_id")
 	private int id;
 	
-	@Column(name = "image_location", length = 45, nullable = false)
-	private String imageLocation;
+	@ManyToOne
+	@JoinColumn(name="instructions_id", nullable = false)
+	private Instructions instruction;
+	
+	@ManyToOne
+	@JoinColumn(name="recipe_id")
+	private Recipe recipe;
 	
 	@Column(nullable = false)
-	private String title;
-	
-	@Column(length = 45)
-	private String description;
-	
-	@Column(name="public", nullable = false)
-	private boolean publicRecipe;
+	private int order;
 	
 	@ManyToOne
 	@JoinColumn(name="created_by", nullable = false)
 	private SystemUser createdBy;
-	
 	
 	@Column(name="creation_date", nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -53,53 +51,38 @@ public class Recipe {
 	@JoinColumn(name="last_updated_by", nullable = false)
 	private SystemUser lastUpdatedBy;
 	
-	@Column(name = "last_update_date")
+	@Column(name = "last_update_date", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date last_update_date;
-	
-	@ManyToOne
-	@JoinColumn(name="category_id", nullable = false)
-	private Category category;
 
-	public Recipe() {
+	public InstructionsRecipe() {
 		super();
 	}
 
-	
-
-	public Recipe(String imageLocation, String title, String description, boolean publicRecipe, SystemUser createdBy,
-			Date creationDate, SystemUser lastUpdatedBy, Date last_update_date, Category category) {
-		super();
-		this.imageLocation = imageLocation;
-		this.title = title;
-		this.description = description;
-		this.publicRecipe = publicRecipe;
-		this.createdBy = createdBy;
-		this.creationDate = creationDate;
-		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
-		this.category = category;
-	}
-
-
-
-	public Recipe(int id, String imageLocation, String title, String description, boolean publicRecipe,
-			SystemUser createdBy, Date creationDate, SystemUser lastUpdatedBy, Date last_update_date,
-			Category category) {
+	public InstructionsRecipe(int id, Instructions instruction, Recipe recipe, int order, SystemUser createdBy,
+			Date creationDate, SystemUser lastUpdatedBy, Date last_update_date) {
 		super();
 		this.id = id;
-		this.imageLocation = imageLocation;
-		this.title = title;
-		this.description = description;
-		this.publicRecipe = publicRecipe;
+		this.instruction = instruction;
+		this.recipe = recipe;
+		this.order = order;
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
 		this.last_update_date = last_update_date;
-		this.category = category;
 	}
 
-
+	public InstructionsRecipe(Instructions instruction, Recipe recipe, int order, SystemUser createdBy,
+			Date creationDate, SystemUser lastUpdatedBy, Date last_update_date) {
+		super();
+		this.instruction = instruction;
+		this.recipe = recipe;
+		this.order = order;
+		this.createdBy = createdBy;
+		this.creationDate = creationDate;
+		this.lastUpdatedBy = lastUpdatedBy;
+		this.last_update_date = last_update_date;
+	}
 
 	public int getId() {
 		return id;
@@ -109,36 +92,28 @@ public class Recipe {
 		this.id = id;
 	}
 
-	public String getImageLocation() {
-		return imageLocation;
+	public Instructions getInstruction() {
+		return instruction;
 	}
 
-	public void setImageLocation(String imageLocation) {
-		this.imageLocation = imageLocation;
+	public void setInstruction(Instructions instruction) {
+		this.instruction = instruction;
 	}
 
-	public String getTitle() {
-		return title;
+	public Recipe getRecipe() {
+		return recipe;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
 	}
 
-	public String getDescription() {
-		return description;
+	public int getOrder() {
+		return order;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public boolean isPublicRecipe() {
-		return publicRecipe;
-	}
-
-	public void setPublicRecipe(boolean publicRecipe) {
-		this.publicRecipe = publicRecipe;
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	public SystemUser getCreatedBy() {
@@ -163,14 +138,6 @@ public class Recipe {
 
 	public void setLastUpdatedBy(SystemUser lastUpdatedBy) {
 		this.lastUpdatedBy = lastUpdatedBy;
-	}
-
-	public Category getCategoryId() {
-		return category;
-	}
-
-	public void setCategoryId(Category category) {
-		this.category = category;
 	}
 
 	public Date getLast_update_date() {
