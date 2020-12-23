@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * Model class to represent the Recipe_amount table of the database
@@ -29,27 +30,33 @@ public class RecipeAmount {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="recipe_id", nullable = false)
+	@JoinColumn(name="recipe_id")
+	@NotNull
 	private Recipe recipe;
 	
 	@ManyToOne
-	@JoinColumn(name="amount_id", nullable = false)
+	@JoinColumn(name="amount_id")
+	@NotNull
 	private Amount amount;
 	
 	@ManyToOne
-	@JoinColumn(name="created_by", nullable = false)
+	@JoinColumn(name="created_by")
+	@NotNull
 	private SystemUser createdBy;
 	
-	@Column(name="creation_date", nullable = false)
+	@Column(name="creation_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date creationDate;
 	
 	@ManyToOne
-	@JoinColumn(name="last_updated_by", nullable = false)
+	@JoinColumn(name="last_updated_by")
+	@NotNull
 	private SystemUser lastUpdatedBy;
 	
-	@Column(name = "last_update_date", nullable = false)
+	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date last_update_date;
 
 	public RecipeAmount() {

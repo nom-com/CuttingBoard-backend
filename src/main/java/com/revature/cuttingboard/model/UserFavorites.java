@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * Model class to represent the user_favorites table of the database. 
@@ -29,15 +30,18 @@ public class UserFavorites {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="recipe_id", nullable = false)
+	@JoinColumn(name="recipe_id")
+	@NotNull
 	private Recipe recipe;
 	
 	@ManyToOne
-	@JoinColumn(name="system_user_id", nullable = false)
+	@JoinColumn(name="system_user_id")
+	@NotNull
 	private SystemUser systemUser;
 	
-	@Column(name="creation_date", nullable = false)
+	@Column(name="creation_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date creationDate;
 
 	public UserFavorites() {

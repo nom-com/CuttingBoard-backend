@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * Model class to represent the category database table
@@ -29,14 +30,17 @@ public class Category {
 	private int id;
 	
 	@Column(length = 45)
+	@NotNull
 	private String category;
 	
 	@Column(name = "creation_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date creationDate;
 	
 	@ManyToOne
-	@JoinColumn(name="created_by", nullable = false)
+	@JoinColumn(name="created_by")
+	@NotNull
 	private SystemUser createdBy;
 
 	public Category() {

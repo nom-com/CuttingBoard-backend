@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * Model class to represent the amount database table
@@ -28,27 +29,33 @@ public class Amount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false)
+	@Column
+	@NotNull
 	private String amount;
 	
 	@ManyToOne
-	@JoinColumn(name="ingredient_id", nullable = false)
+	@JoinColumn(name="ingredient_id")
+	@NotNull
 	private Ingredients ingredient;
 	
 	@ManyToOne
-	@JoinColumn(name="created_by", nullable = false)
+	@JoinColumn(name="created_by")
+	@NotNull
 	private SystemUser createdBy;
 	
-	@Column(name="creation_date", nullable = false)
+	@Column(name="creation_date")
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 	
 	@ManyToOne
-	@JoinColumn(name="last_updated_by", nullable = false)
+	@JoinColumn(name="last_updated_by")
+	@NotNull
 	private SystemUser lastUpdatedBy;
 	
-	@Column(name = "last_update_date", nullable = false)
+	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date last_update_date;
 
 	public Amount() {

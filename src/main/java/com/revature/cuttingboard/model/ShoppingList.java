@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * Model class to represent the shopping_list table of the database
@@ -30,15 +31,18 @@ public class ShoppingList {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="ingredients_id", nullable = false)
+	@JoinColumn(name="ingredients_id")
+	@NotNull
 	private Ingredients ingredient;
 	
 	@ManyToOne
-	@JoinColumn(name="system_user_id", nullable = false)
+	@JoinColumn(name="system_user_id")
+	@NotNull
 	private SystemUser systemUser;
 	
-	@Column(name="creation_date", nullable = false)
+	@Column(name="creation_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date creationDate;
 
 	public ShoppingList() {

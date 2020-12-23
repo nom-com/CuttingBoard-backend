@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * Model class to represent the recipe table in the database
@@ -28,37 +29,45 @@ public class Recipe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "image_location", length = 45, nullable = false)
+	@Column(name = "image_location", length = 45)
+	@NotNull
 	private String imageLocation;
 	
-	@Column(nullable = false)
+	@Column
+	@NotNull
 	private String title;
 	
-	@Column(length = 45)
+	@Column(length = 255)
 	private String description;
 	
-	@Column(name="public", nullable = false)
+	@Column(name="public")
+	@NotNull
 	private boolean publicRecipe;
 	
 	@ManyToOne
-	@JoinColumn(name="created_by", nullable = false)
+	@JoinColumn(name="created_by")
+	@NotNull
 	private SystemUser createdBy;
 	
 	
-	@Column(name="creation_date", nullable = false)
+	@Column(name="creation_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date creationDate;
 	
 	@ManyToOne
-	@JoinColumn(name="last_updated_by", nullable = false)
+	@JoinColumn(name="last_updated_by")
+	@NotNull
 	private SystemUser lastUpdatedBy;
 	
 	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date last_update_date;
 	
 	@ManyToOne
-	@JoinColumn(name="category_id", nullable = false)
+	@JoinColumn(name="category_id")
+	@NotNull
 	private Category category;
 
 	public Recipe() {

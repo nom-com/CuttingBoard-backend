@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -27,33 +28,42 @@ public class SystemUser {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(length = 45, nullable = false, unique = true)
+	@Column(length = 45, unique = true)
+	@NotNull
 	private String username;
 	
-	@Column(length = 75, nullable = false)
+	@Column(length = 75)
+	@NotNull
 	private String password;
 	
-	@Column(length = 45, nullable = false, unique = true)
+	@Column(length = 45, unique = true)
+	@NotNull
 	private String email;
 	
-	@Column(name="first_name", length = 45, nullable = false)
+	@Column(name="first_name", length = 45)
+	@NotNull
 	private String firstName;
 	
-	@Column(name="last_name", length = 45, nullable = false)
+	@Column(name="last_name", length = 45)
+	@NotNull
 	private String lastName;
 	
-	@Column(name="creation_date", nullable = false)
+	@Column(name="creation_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date creationDate;
 	
-	@Column(name="last_update_date", nullable = false)
+	@Column(name="last_update_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date last_update_date;
 	
-	@Column(name="admin", nullable = false)
+	@Column(name="admin")
+	@NotNull
 	private boolean admin;
 	
-	@Column(length=75, nullable = false)
+	@Column(length=75)
+	@NotNull
 	private String salt;
 
 	public SystemUser() {

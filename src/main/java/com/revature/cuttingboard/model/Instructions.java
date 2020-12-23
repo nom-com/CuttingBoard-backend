@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * Model Class to represent the ingredients table of the database
@@ -29,23 +30,28 @@ public class Instructions {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="step", nullable = false, length = 45)
+	@Column(name="step", length = 45)
+	@NotNull
 	private String step;
 	
 	@ManyToOne
-	@JoinColumn(name="created_by", nullable = false)
+	@JoinColumn(name="created_by")
+	@NotNull
 	private SystemUser createdBy;
 	
-	@Column(name="creation_date", nullable = false)
+	@Column(name="creation_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date creationDate;
 	
 	@ManyToOne
-	@JoinColumn(name="last_updated_by", nullable = false)
+	@JoinColumn(name="last_updated_by")
+	@NotNull
 	private SystemUser lastUpdatedBy;
 	
-	@Column(name = "last_update_date", nullable = false)
+	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date last_update_date;
 
 	public Instructions() {
