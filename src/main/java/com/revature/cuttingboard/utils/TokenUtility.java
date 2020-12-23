@@ -1,16 +1,18 @@
 package com.revature.cuttingboard.utils;
 
-import java.security.Signature;
 import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import javax.xml.bind.DatatypeConverter;
+
+import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Component
 public class TokenUtility {
 	
 	private String SECRET_KEY = "secret";
