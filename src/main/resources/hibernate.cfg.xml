@@ -5,8 +5,8 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/cuttingboard</property>
-		<property name="hibernate.default_schema">"public"</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+		<property name="hibernate.default_schema">"cuttingboard"</property>
 		
 		<!-- SQL Dialect -->
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
@@ -20,6 +20,10 @@
 		<mapping class="com.revature.cuttingboard.model.Ingredients"/>
 		<mapping class="com.revature.cuttingboard.model.Amount"/>
 		<mapping class="com.revature.cuttingboard.model.Instructions"/>
+		<mapping class="com.revature.cuttingboard.model.InstructionsRecipe"/>
+		<mapping class="com.revature.cuttingboard.model.RecipeAmount"/>
+		<mapping class="com.revature.cuttingboard.model.ShoppingList"/>
+		<mapping class="com.revature.cuttingboard.model.UserFavorites"/>
 	
 	</session-factory>
 </hibernate-configuration>	

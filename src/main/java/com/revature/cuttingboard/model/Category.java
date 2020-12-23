@@ -89,6 +89,12 @@ public class Category {
 	public void setCreatedBy(SystemUser createdBy) {
 		this.createdBy = createdBy;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", category=" + category + ", creationDate=" + creationDate + ", createdBy="
+				+ createdBy + "]";
+	}
 	
 	
 }

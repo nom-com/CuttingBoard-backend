@@ -134,6 +134,13 @@ public class RecipeAmount {
 	public void setLast_update_date(Date last_update_date) {
 		this.last_update_date = last_update_date;
 	}
+
+	@Override
+	public String toString() {
+		return "RecipeAmount [id=" + id + ", recipe=" + recipe + ", amount=" + amount + ", createdBy=" + createdBy
+				+ ", creationDate=" + creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", last_update_date="
+				+ last_update_date + "]";
+	}
 	
 	
 	

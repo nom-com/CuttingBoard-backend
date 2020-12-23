@@ -36,7 +36,7 @@ public class UserFavorites {
 	@JoinColumn(name="system_user_id", nullable = false)
 	private SystemUser systemUser;
 	
-	@Column(name="created_by", nullable = false)
+	@Column(name="creation_date", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 
@@ -89,6 +89,12 @@ public class UserFavorites {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	@Override
+	public String toString() {
+		return "UserFavorites [id=" + id + ", recipe=" + recipe + ", systemUser=" + systemUser + ", creationDate="
+				+ creationDate + "]";
 	}
 	
 	

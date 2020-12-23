@@ -168,6 +168,13 @@ public class SystemUser {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
+
+	@Override
+	public String toString() {
+		return "SystemUser [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", creationDate=" + creationDate
+				+ ", last_update_date=" + last_update_date + ", admin=" + admin + ", salt=" + salt + "]";
+	}
 	
 	
 	

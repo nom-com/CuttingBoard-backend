@@ -120,6 +120,12 @@ public class Instructions {
 	public void setLast_update_date(Date last_update_date) {
 		this.last_update_date = last_update_date;
 	}
+
+	@Override
+	public String toString() {
+		return "Instructions [id=" + id + ", step=" + step + ", createdBy=" + createdBy + ", creationDate="
+				+ creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", last_update_date=" + last_update_date + "]";
+	}
 	
 	
 	

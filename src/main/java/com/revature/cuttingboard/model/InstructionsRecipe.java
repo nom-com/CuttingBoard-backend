@@ -147,6 +147,13 @@ public class InstructionsRecipe {
 	public void setLast_update_date(Date last_update_date) {
 		this.last_update_date = last_update_date;
 	}
+
+	@Override
+	public String toString() {
+		return "InstructionsRecipe [id=" + id + ", instruction=" + instruction + ", recipe=" + recipe + ", order="
+				+ order + ", createdBy=" + createdBy + ", creationDate=" + creationDate + ", lastUpdatedBy="
+				+ lastUpdatedBy + ", last_update_date=" + last_update_date + "]";
+	}
 	
 	
 	

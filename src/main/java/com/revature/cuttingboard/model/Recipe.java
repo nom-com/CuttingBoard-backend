@@ -180,6 +180,16 @@ public class Recipe {
 	public void setLast_update_date(Date last_update_date) {
 		this.last_update_date = last_update_date;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Recipe [id=" + id + ", imageLocation=" + imageLocation + ", title=" + title + ", description="
+				+ description + ", publicRecipe=" + publicRecipe + ", createdBy=" + createdBy + ", creationDate="
+				+ creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", last_update_date=" + last_update_date
+				+ ", category=" + category + "]";
+	}
 	
 	
 	

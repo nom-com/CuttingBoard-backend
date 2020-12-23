@@ -91,6 +91,12 @@ public class ShoppingList {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
+	@Override
+	public String toString() {
+		return "ShoppingList [id=" + id + ", ingredient=" + ingredient + ", systemUser=" + systemUser
+				+ ", creationDate=" + creationDate + "]";
+	}
 	
 	
 }

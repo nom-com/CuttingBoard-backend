@@ -1,3 +1,5 @@
+-- Be sure to run this in a schema named cuttingboard in order for the backend server 
+-- to connect to it properly. 
 DROP TABLE IF EXISTS shopping_list;
 DROP TABLE IF EXISTS user_favorites;
 DROP TABLE IF EXISTS instructions_recipe;
