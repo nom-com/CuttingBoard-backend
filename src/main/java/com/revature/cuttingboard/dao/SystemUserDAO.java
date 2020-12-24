@@ -1,6 +1,7 @@
 package com.revature.cuttingboard.dao;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.cuttingboard.model.SystemUser;
@@ -19,11 +20,11 @@ public class SystemUserDAO {
 
 	public SystemUser insertUser(SystemUser newUser) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
-			
+			Transaction tx = session.beginTransaction();
 			session.save(newUser);
 			
+			tx.commit();
 			session.close();
-			
 			return newUser;
 		} catch (Exception e) {
 			throw new Exception("PSQL Error");
