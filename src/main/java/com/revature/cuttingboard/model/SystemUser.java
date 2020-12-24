@@ -56,7 +56,7 @@ public class SystemUser {
 	@Column(name="last_update_date")
 	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date last_update_date;
+	private Date lastUpdateDate;
 	
 	@Column(name="admin")
 	@NotNull
@@ -71,7 +71,7 @@ public class SystemUser {
 	}
 
 	public SystemUser(int id, String username, String password, String email, String firstName, String lastName,
-			Date creationDate, Date last_update_date, boolean admin, String salt) {
+			Date creationDate, Date lastUpdateDate, boolean admin, String salt) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -80,13 +80,13 @@ public class SystemUser {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.creationDate = creationDate;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 		this.admin = admin;
 		this.salt = salt;
 	}
 
 	public SystemUser(String username, String password, String email, String firstName, String lastName,
-			Date creationDate, Date last_update_date, boolean admin, String salt) {
+			Date creationDate, Date lastUpdateDate, boolean admin, String salt) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -94,7 +94,7 @@ public class SystemUser {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.creationDate = creationDate;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 		this.admin = admin;
 		this.salt = salt;
 	}
@@ -156,11 +156,11 @@ public class SystemUser {
 	}
 
 	public Date getLast_update_date() {
-		return last_update_date;
+		return lastUpdateDate;
 	}
 
-	public void setLast_update_date(Date last_update_date) {
-		this.last_update_date = last_update_date;
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public boolean isAdmin() {
@@ -183,7 +183,7 @@ public class SystemUser {
 	public String toString() {
 		return "SystemUser [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", creationDate=" + creationDate
-				+ ", last_update_date=" + last_update_date + ", admin=" + admin + ", salt=" + salt + "]";
+				+ ", lastUpdateDate=" + lastUpdateDate + ", admin=" + admin + ", salt=" + salt + "]";
 	}
 	
 	
