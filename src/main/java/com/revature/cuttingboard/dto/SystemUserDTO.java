@@ -59,5 +59,4 @@ public class SystemUserDTO {
 	public String toString() {
 		return "SystemUserDTO [id=" + id + ", username=" + username + ", admin=" + admin + "]";
 	}	
-	
 }
