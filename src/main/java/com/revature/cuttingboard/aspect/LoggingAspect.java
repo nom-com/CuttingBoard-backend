@@ -30,7 +30,7 @@ public class LoggingAspect {
 	public void allMethodsInController() {}
 	
 	@Before("allMethodsInController()")
-	public void beforeAllControllerMethods(JoinPoint jp) {
+	public void beforeAllControllerMethods() {
 		logger.info(req.getMethod() + " Request recevied to " + req.getServletPath());
 	}
 }
