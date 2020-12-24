@@ -26,6 +26,7 @@ public class SystemUserController {
 	@PostMapping("/create")
 	public SystemUserDTO createUser(@RequestBody SystemUser newUser, HttpServletResponse res) {
 		try {
+			res.setStatus(201);
 			return systemUserService.createUser(newUser);
 		} catch (Exception e) {
 			res.setStatus(400);

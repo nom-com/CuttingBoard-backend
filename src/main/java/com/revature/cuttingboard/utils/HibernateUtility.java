@@ -11,8 +11,6 @@ public class HibernateUtility {
 	
 	public static Session getSession() {
 		if (sessionFactory == null) {
-			System.out.println(System.getenv("DB_USERNAMEE"));
-			System.out.println(System.getenv("DB_PASSWORD"));
 			sessionFactory = new Configuration().setProperty("hibernate.connection.username", System.getenv("DB_USERNAME"))
 					.setProperty("hibernate.connection.password", System.getenv("DB_PASSWORD"))
 					.configure("hibernate.cfg.xml")
