@@ -34,7 +34,21 @@ public class SystemUserDAO {
 	public SystemUser getUserByUsername(String username) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 			Transaction tx = session.beginTransaction();
-			SystemUser user = (SystemUser) session.createQuery("SELECT s FROM system_user s WHERE s.username = :username").setParameter("username",  username).getSingleResult();
+			String query = "SELECT s FROM system_user s WHERE s.username = :username";
+			SystemUser user = (SystemUser) session.createQuery(query).setParameter("username",  username).getSingleResult();
+			
+			session.close();
+			return user;
+		} catch (Exception e) {
+			throw new Exception("User not found.");
+		}
+	}
+	
+	public SystemUser getPassword(String username) throws Exception {
+		try (Session session = HibernateUtility.getSession()) {
+			Transaction tx = session.beginTransaction();
+			String query = "SELECT s.password FROM system_user s WHERE s.password = :username";
+			SystemUser user = (SystemUser) session.createQuery(query).setParameter("username",  username).getSingleResult();
 			
 			session.close();
 			return user;
