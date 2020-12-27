@@ -1,6 +1,7 @@
 package com.revature.cuttingboard.utils;
 
 import java.util.Collection;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +16,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+/**
+ * Creates and decodes Java Web Tokens.
+ */
 
 @Component
 public class TokenUtility implements Claims {

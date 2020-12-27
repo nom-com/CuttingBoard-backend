@@ -34,7 +34,7 @@ public class SystemUserDAO {
 	public SystemUser getUserByUsername(String username) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 			Transaction tx = session.beginTransaction();
-			String query = "SELECT s FROM system_user s WHERE s.username = :username";
+			String query = "FROM SystemUser s WHERE s.username = :username";
 			SystemUser user = (SystemUser) session.createQuery(query).setParameter("username",  username).getSingleResult();
 			
 			session.close();
@@ -44,16 +44,29 @@ public class SystemUserDAO {
 		}
 	}
 	
-	public SystemUser getPassword(String username) throws Exception {
-		try (Session session = HibernateUtility.getSession()) {
-			Transaction tx = session.beginTransaction();
-			String query = "SELECT s.password FROM system_user s WHERE s.password = :username";
-			SystemUser user = (SystemUser) session.createQuery(query).setParameter("username",  username).getSingleResult();
-			
-			session.close();
-			return user;
-		} catch (Exception e) {
-			throw new Exception("User not found.");
-		}
-	}
+//	public String getPassword(String username) throws Exception {
+//		try (Session session = HibernateUtility.getSession()) {
+//			Transaction tx = session.beginTransaction();
+//			String query = "SELECT password FROM SystemUser s WHERE s.username = :username";
+//			String user = (String) session.createQuery(query).setParameter("username",  username).getSingleResult();
+//			
+//			session.close();
+//			return user;
+//		} catch (Exception e) {
+//			throw new Exception("User not found.");
+//		}
+//	}
+//	
+//	public String getSalt(String username) throws Exception {
+//		try (Session session = HibernateUtility.getSession()) {
+//			Transaction tx = session.beginTransaction();
+//			String query = "SELECT salt FROM SystemUser s WHERE s.username = :username";
+//			String user = (String) session.createQuery(query).setParameter("username",  username).getSingleResult();
+//			
+//			session.close();
+//			return user;
+//		} catch (Exception e) {
+//			throw new Exception("User not found.");
+//		}
+//	}
 }
