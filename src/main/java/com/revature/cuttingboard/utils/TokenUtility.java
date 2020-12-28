@@ -1,8 +1,9 @@
 package com.revature.cuttingboard.utils;
 
-import java.util.Date;
-import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
+import java.util.Date;
+
+import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.stereotype.Component;
@@ -11,6 +12,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+/**
+ * Creates and decodes Java Web Tokens.
+ */
 
 @Component
 public class TokenUtility {
