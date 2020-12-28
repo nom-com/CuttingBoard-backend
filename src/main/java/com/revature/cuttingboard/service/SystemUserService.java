@@ -1,8 +1,7 @@
 package com.revature.cuttingboard.service;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +25,7 @@ public class SystemUserService {
 	private SystemUserDAO systemUserDao;
 	@Autowired
 	private PasswordHashingUtility passwordHashingUtility;
+	
 	
 	public SystemUserDTO createUser(SystemUser newUser) throws Exception {
 		// setting common values
