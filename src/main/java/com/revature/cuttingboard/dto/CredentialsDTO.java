@@ -4,16 +4,14 @@ public class CredentialsDTO {
 
 		private String username;
 		private String password;
-		String token;
 		
 		public CredentialsDTO() {
 			super();
 		}
 		
-		public CredentialsDTO(String username, String password, String token) {
+		public CredentialsDTO(String username, String password) {
 			this.username = username;
 			this.password = password;
-			this.token = token;
 		}
 
 		public String getUsername() {
@@ -36,14 +34,4 @@ public class CredentialsDTO {
 		public String toString() {
 			return "CredentialsDTO [username=" + username + ", password=" + password + "]";
 		}
-		
-		public String getToken() {
-			return token;
-		}
-		
-		public void setToken(String token) {
-			this.token = token;
-		}
-		
-		
 }

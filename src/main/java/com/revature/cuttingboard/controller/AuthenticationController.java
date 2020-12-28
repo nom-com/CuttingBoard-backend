@@ -33,8 +33,7 @@ public class AuthenticationController {
 					
 					//Create and set token for user
 					String userToken = token.createJWT(storedId, "Nom.com", currentUsername, 1500000);
-					user.setToken(userToken);
-					resp.setHeader("Token", user.getToken());
+					resp.setHeader("Token", userToken);
 	
 					resp.setStatus(200);
 					return sysUser;
