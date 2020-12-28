@@ -1,12 +1,9 @@
 package com.revature.cuttingboard.service;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.revature.cuttingboard.dao.SystemUserDAO;
 import com.revature.cuttingboard.dto.CredentialsDTO;
@@ -16,7 +13,7 @@ import com.revature.cuttingboard.utils.PasswordHashingUtility;
 import com.revature.cuttingboard.utils.TokenUtility;
 
 /**
- * Service class to handle user authentication for users.
+ * Service class to handle user authentication.
  * @author nom.com
  */
 
@@ -53,17 +50,4 @@ public class AuthenticationService {
 			throw new Exception("User not found."); 
 		}
 	}
-	
-//	public TokenUtility logout() throws Exception {
-//		try {
-//			//Set token expiration to 0
-//			long nowMillis = System.currentTimeMillis();
-//			long expMillis = nowMillis * 0;
-//			Date exp = new Date(expMillis);
-//			token.setExpiration(exp);
-//			return token;
-//		} catch (Exception e) {
-//			throw new Exception("No token available.");
-//		}
-//	}
 }
