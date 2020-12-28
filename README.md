@@ -32,3 +32,22 @@ A correct response should be an HTTP status of 201 and a response body similar t
 }
 ```
 Authentication is not required for this endpoint.
+
+## Login/Logout Endpoint
+> POST /login
+
+A request to this endpoint should contain a JSON body such as the following:
+(all fields are required)
+```json
+{
+    "username": "basicuser",
+    "password": "password"
+}
+```
+A correct response should be an HTTP status of 200 and a basic welcome message to the user in the response body.
+
+>GET /logout
+
+A request to this endpoint will expire the web token for the user, ending their session.
+
+A correct response should return an HTTP status of 200 along with a goodbye message to the user in the response body.
