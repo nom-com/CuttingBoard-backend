@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.cuttingboard.dao.SystemUserDAO;
 import com.revature.cuttingboard.dto.CredentialsDTO;
+import com.revature.cuttingboard.dto.SystemUserDTO;
 import com.revature.cuttingboard.model.SystemUser;
 import com.revature.cuttingboard.service.AuthenticationService;
 import com.revature.cuttingboard.utils.TokenUtility;
@@ -28,25 +29,28 @@ public class AuthenticationController {
 		HttpServletResponse resp;
 		@Autowired
 		AuthenticationService authService;
-		@Autowired
-		SystemUserDAO systemUserDao;
 		
 		@PostMapping(value="/login")
-		public CredentialsDTO login(@RequestBody CredentialsDTO user) throws Exception {
+		public SystemUserDTO login(@RequestBody CredentialsDTO user) throws Exception {
 			try {
-				//Fields
-				String currentUsername = user.getUsername();
-				SystemUser storedUser = (SystemUser)systemUserDao.getUserByUsername(currentUsername);
-				String storedId = String.valueOf(storedUser.getId());
-				
-				//Create and set token for user
-				String userToken = token.createJWT(storedId, "Nom.com", currentUsername, 1500000);
-				user.setToken(userToken);
-				resp.setHeader("Token", user.getToken());
-				
-				resp.getWriter().append("Welcome " + user.getUsername());
-				resp.setStatus(200);
-				return authService.login(user);
+				SystemUserDTO sysUser = authService.login(user);
+				if(sysUser != null) {
+					//Fields
+					String currentUsername = sysUser.getUsername();
+					String storedId = String.valueOf(sysUser.getId());
+					
+					//Create and set token for user
+					String userToken = token.createJWT(storedId, "Nom.com", currentUsername, 1500000);
+					user.setToken(userToken);
+					resp.setHeader("Token", user.getToken());
+	
+					resp.setStatus(200);
+					return sysUser;
+				} else {
+					resp.setStatus(400);
+					resp.getWriter().append("Incorrect password.");
+					return null;
+				}
 			} catch (Exception e) {
 				resp.setStatus(400);
 				return null;
@@ -60,7 +64,6 @@ public class AuthenticationController {
 				if (token != null) {
 					userToken = token.createJWT("0", "Nom.com", "Expired", 0);
 					resp.setHeader("Token", userToken);
-					resp.getWriter().append("Goodbye");
 					resp.setStatus(200);
 				}
 			} catch (Exception e) {

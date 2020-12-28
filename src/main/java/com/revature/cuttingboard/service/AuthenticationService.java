@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.revature.cuttingboard.dao.SystemUserDAO;
 import com.revature.cuttingboard.dto.CredentialsDTO;
+import com.revature.cuttingboard.dto.SystemUserDTO;
 import com.revature.cuttingboard.model.SystemUser;
 import com.revature.cuttingboard.utils.PasswordHashingUtility;
 import com.revature.cuttingboard.utils.TokenUtility;
@@ -31,7 +32,7 @@ public class AuthenticationService {
 	@Autowired
 	HttpServletResponse resp;
 	
-	public CredentialsDTO login(CredentialsDTO user) throws Exception {
+	public SystemUserDTO login(CredentialsDTO user) throws Exception {
 		try {
 			//Fields 
 			String currentUsername = user.getUsername();
@@ -43,9 +44,8 @@ public class AuthenticationService {
 			String storedSalt = storedUser.getSalt();
 			
 			//Validate password and return a user
-			if (currentUsername.equals(storedUsername) && currentPassword.equals(storedPassword)) {
-				passHash.validatePassword(currentPassword, storedPassword, storedSalt);
-				return user;
+			if (passHash.validatePassword(currentPassword, storedPassword, storedSalt)) {
+				return new SystemUserDTO(storedUser);
 			} else {
 				return null;
 			}
