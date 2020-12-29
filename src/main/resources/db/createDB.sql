@@ -72,7 +72,9 @@ CREATE TABLE amount
 ,CONSTRAINT fk_amount_1 FOREIGN KEY (created_by)
 	REFERENCES system_user(system_user_id)
 , CONSTRAINT fk_amount_2 FOREIGN KEY (last_updated_by)
-	REFERENCES system_user(system_user_id));
+	REFERENCES system_user(system_user_id)
+, CONSTRAINT fk_amount_3 FOREIGN KEY (ingredient_id)
+	REFERENCES ingredients(ingredients_id));
 
 CREATE TABLE recipe_amount
 ( recipe_amount_id SERIAL PRIMARY KEY

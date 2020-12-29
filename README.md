@@ -126,7 +126,7 @@ A POST request to this endpoint will add a new ingredient to the ingredients tab
 }
 ```
 
-A successful request will return a 200 status and the id value and entered name of the ingredient. 
+A successful request will return a 201 status and the id value and entered name of the ingredient. 
 
 ```json
 {
@@ -156,3 +156,52 @@ A successful response will return a 200 status and a response body similar tot h
 
 A DELETE request with an associated id value will delete the specified record from the ingredients table. A successful request will return a 204 status code and will have no content in the reponse body. 
 
+## Amount Endpoints
+> GET /amount/{id}
+
+A request to this endpoint will return the details of the amount record with the specified id. A status 400 will be returned if the id does not exist. 
+
+> POST /amount
+
+A POST request to this endpoint will insert a new amount record into the database. The request body should contain data necessary for a new amount record like the following:
+```json
+{
+    "amount": "6 cloves",
+    "ingredientId": 1
+}
+```
+The connected ingredient is included as an ingredient id (value can be obtained from the ingredients endpoint). A successful response should have a 201 status code and a response body like the following:
+```json
+{
+    "id": 8,
+    "amount": "6 cloves",
+    "ingredient": {
+        "id": 1,
+        "ingredient": "Garlic"
+    }
+}
+```
+
+>PUT /amount/{id}
+
+A request to this endpoint will update the amount section of an amount record. All that is needed in the request body is the new amount.
+```json
+{
+    "amount": "5 cloves"
+}
+```
+A successful response will return a 200 status code, and a response body with the updated amount information. 
+```json 
+{
+    "id": 8,
+    "amount": "5 cloves",
+    "ingredient": {
+        "id": 1,
+        "ingredient": "Garlic"
+    }
+}
+```
+
+> DELETE /amount/{id}
+
+A request to this endpoint will delete the amount record with the specified id value. A successful request will receive a status code 204 in response. 
