@@ -44,13 +44,21 @@ A request to this endpoint should contain a JSON body such as the following:
     "password": "password"
 }
 ```
-A correct response should be an HTTP status of 200 and a basic welcome message to the user in the response body.
+A correct response should be an HTTP status of 200.
 
->GET /logout
+## Create Instructions Endpoint
+> POST /instructions
 
-A request to this endpoint will expire the web token for the user, ending their session.
 
-A correct response should return an HTTP status of 200 along with a goodbye message to the user in the response body.
+A request to this endpoint should contain a JSON body such as the following:
+(all fields are required)
+```json
+{
+    "step": "Example instructions here."
+}
+```
+A correct response should be an HTTP status of 201.
+
 
 
 
@@ -147,3 +155,4 @@ A successful response will return a 200 status and a response body similar tot h
 >DELETE /ingredients/{id}
 
 A DELETE request with an associated id value will delete the specified record from the ingredients table. A successful request will return a 204 status code and will have no content in the reponse body. 
+
