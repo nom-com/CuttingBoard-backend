@@ -45,3 +45,15 @@ A request to this endpoint should contain a JSON body such as the following:
 }
 ```
 A correct response should be an HTTP status of 200.
+
+## Create Instructions Endpoint
+> POST /instructions/create
+
+A request to this endpoint should contain a JSON body such as the following:
+(all fields are required)
+```json
+{
+    "step": "Example instructions here."
+}
+```
+A correct response should be an HTTP status of 201.
