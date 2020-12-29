@@ -45,7 +45,7 @@ public class AuthAspect {
 			Object result = jp.proceed(jp.getArgs());
 			return result;
 		} catch (Exception e) {
-			res.setStatus(400);
+			res.setStatus(401);
 			e.printStackTrace();
 			return null;
 		} catch (Throwable e) {
