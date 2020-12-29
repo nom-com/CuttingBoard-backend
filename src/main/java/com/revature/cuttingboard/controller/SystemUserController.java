@@ -20,7 +20,7 @@ public class SystemUserController {
 	private SystemUserService systemUserService;
 	
 	
-	@PostMapping("/create")
+	@PostMapping("")
 	public SystemUserDTO createUser(@RequestBody SystemUser newUser, HttpServletResponse res) {
 		try {
 			res.setStatus(201);
