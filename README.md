@@ -33,7 +33,7 @@ A correct response should be an HTTP status of 201 and a response body similar t
 ```
 Authentication is not required for this endpoint.
 
-## Login/Logout Endpoint
+## Login Endpoint
 > POST /login
 
 A request to this endpoint should contain a JSON body such as the following:
