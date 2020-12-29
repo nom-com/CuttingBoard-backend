@@ -24,7 +24,7 @@ public class InstructionsController {
 		HttpServletResponse resp;
 		
 		
-		@PostMapping("/create")
+		@PostMapping("")
 		@AuthenticatedEndpoint
 		public InstructionsDTO createInstruction(@RequestBody Instructions instructions, SystemUser user) throws Exception {
 			try {
