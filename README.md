@@ -44,10 +44,4 @@ A request to this endpoint should contain a JSON body such as the following:
     "password": "password"
 }
 ```
-A correct response should be an HTTP status of 200 and a basic welcome message to the user in the response body.
-
->GET /logout
-
-A request to this endpoint will expire the web token for the user, ending their session.
-
-A correct response should return an HTTP status of 200 along with a goodbye message to the user in the response body.
+A correct response should be an HTTP status of 200.
