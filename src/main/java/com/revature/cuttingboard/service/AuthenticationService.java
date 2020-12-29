@@ -1,7 +1,5 @@
 package com.revature.cuttingboard.service;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +8,6 @@ import com.revature.cuttingboard.dto.CredentialsDTO;
 import com.revature.cuttingboard.dto.SystemUserDTO;
 import com.revature.cuttingboard.model.SystemUser;
 import com.revature.cuttingboard.utils.PasswordHashingUtility;
-import com.revature.cuttingboard.utils.TokenUtility;
 
 /**
  * Service class to handle user authentication.
@@ -23,11 +20,7 @@ public class AuthenticationService {
 	@Autowired
 	SystemUserDAO systemUserDao;
 	@Autowired
-	TokenUtility token;
-	@Autowired
 	PasswordHashingUtility passHash;
-	@Autowired
-	HttpServletResponse resp;
 	
 	public SystemUserDTO login(CredentialsDTO user) throws Exception {
 		try {
