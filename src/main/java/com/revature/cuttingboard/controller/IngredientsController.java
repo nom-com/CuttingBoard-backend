@@ -59,6 +59,18 @@ public class IngredientsController {
 		}
 	}
 	
+	@GetMapping("/id/{id}")
+	@AuthenticatedEndpoint
+	public IngredientsDTO getIngredientById(@PathVariable("id") int id, SystemUser user) {
+		try {
+			return ingredientsService.getIngredientById(id);
+		} catch (Exception e) {
+			res.setStatus(400);
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	@PostMapping("")
 	@AuthenticatedEndpoint
 	public IngredientsDTO insertIngredient(@RequestBody Ingredients ingredient, SystemUser user) {

@@ -36,6 +36,10 @@ public class IngredientsService {
 		return ingredients;
 	}
 	
+	public IngredientsDTO getIngredientById(int id) throws Exception {
+		return new IngredientsDTO(ingredientsDao.getIngredientById(id));
+	}
+	
 	public IngredientsDTO insertIngredient(Ingredients ingredient, SystemUser user) throws Exception {
 		//set values not passed in by the user
 		Date today = new Date();

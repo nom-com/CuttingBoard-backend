@@ -97,6 +97,18 @@ for example, a search to /ingredients/ar would return something like:
 ```
 A 200 status code will indicate a successful request. 
 
+> GET /ingredients/id/{id}
+
+A request to this endpoint with an included id will return the ingredient with the specified id value. There is no request body for this request
+
+A successful response will return a 200 status, and a single ingredient response like the following. 
+```json
+{
+    "id": 3,
+    "ingredient": "salt"
+}
+```
+
 > POST /ingredients
 
 A POST request to this endpoint will add a new ingredient to the ingredients table. A post request should include a JSON body with the ingredient name, like the following:

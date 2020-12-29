@@ -55,6 +55,20 @@ public class IngredientsDAO {
 		}
 	}
 	
+	public Ingredients getIngredientById(int id) throws Exception {
+		try (Session session = HibernateUtility.getSession()) {
+			Transaction tx = session.beginTransaction();
+			
+			Ingredients ingredient = session.get(Ingredients.class, id);
+			
+			tx.commit();
+			session.close();
+			return ingredient;
+		} catch (Exception e) {
+			throw new Exception("PSQL Error");
+		}
+	}
+	
 	public Ingredients insertIngredient(Ingredients ingredient) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 			Transaction tx = session.beginTransaction();
