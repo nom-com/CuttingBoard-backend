@@ -32,7 +32,6 @@ public class IngredientsDAO {
 			List<Ingredients> ingredients = session.createQuery(query).getResultList();
 			
 			tx.commit();
-			session.close();
 			return ingredients;
 		} catch (Exception e) {
 			throw new Exception("PSQL Error");
@@ -48,7 +47,6 @@ public class IngredientsDAO {
 					.list();
 			
 			tx.commit();
-			session.close();
 			return ingredients;
 		} catch (Exception e) {
 			throw new Exception("PSQL Error");
@@ -62,7 +60,6 @@ public class IngredientsDAO {
 			Ingredients ingredient = session.get(Ingredients.class, id);
 			
 			tx.commit();
-			session.close();
 			return ingredient;
 		} catch (Exception e) {
 			throw new Exception("PSQL Error");
@@ -76,7 +73,6 @@ public class IngredientsDAO {
 			session.save(ingredient);
 			
 			tx.commit();
-			session.close();
 			return ingredient;
 		} catch (Exception e) {
 			throw new Exception("PSQL Error");
@@ -94,7 +90,6 @@ public class IngredientsDAO {
 			session.update(dbIngredient);
 			
 			tx.commit();
-			session.close();
 			return ingredient;
 		} catch (Exception e) {
 			throw new Exception("PSQL Error");
@@ -108,7 +103,6 @@ public class IngredientsDAO {
 			Ingredients ingredient = session.get(Ingredients.class, id);
 			session.delete(ingredient);
 			tx.commit();
-			session.close();
 			return true;
 		} catch (Exception e) {
 //			throw new Exception("PSQL Error");

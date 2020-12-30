@@ -75,6 +75,7 @@ public class IngredientsController {
 	@AuthenticatedEndpoint
 	public IngredientsDTO insertIngredient(@RequestBody Ingredients ingredient, SystemUser user) {
 		try {
+			res.setStatus(201);
 			return ingredientsService.insertIngredient(ingredient, user);
 		} catch (Exception e) {
 			res.setStatus(400);

@@ -56,14 +56,14 @@ public class Amount {
 	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date last_update_date;
+	private Date lastUpdateDate;
 
 	public Amount() {
 		super();
 	}
 
 	public Amount(int id, String amount, Ingredients ingredient, SystemUser createdBy, Date creationDate,
-			SystemUser lastUpdatedBy, Date last_update_date) {
+			SystemUser lastUpdatedBy, Date lastUpdateDate) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -71,18 +71,18 @@ public class Amount {
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public Amount(String amount, Ingredients ingredient, SystemUser createdBy, Date creationDate,
-			SystemUser lastUpdatedBy, Date last_update_date) {
+			SystemUser lastUpdatedBy, Date lastUpdateDate) {
 		super();
 		this.amount = amount;
 		this.ingredient = ingredient;
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public int getId() {
@@ -133,19 +133,19 @@ public class Amount {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public Date getLast_update_date() {
-		return last_update_date;
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
 	}
 
-	public void setLast_update_date(Date last_update_date) {
-		this.last_update_date = last_update_date;
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Amount [id=" + id + ", amount=" + amount + ", ingredient=" + ingredient + ", createdBy=" + createdBy
-				+ ", creationDate=" + creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", last_update_date="
-				+ last_update_date + "]";
+				+ ", creationDate=" + creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", lastUpdateDate="
+				+ lastUpdateDate + "]";
 	}
 	
 	
