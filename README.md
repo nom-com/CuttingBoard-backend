@@ -46,6 +46,7 @@ A request to this endpoint should contain a JSON body such as the following:
 ```
 A correct response should be an HTTP status of 200.
 
+
 ## Create Instructions Endpoint
 > POST /instructions
 
@@ -205,3 +206,67 @@ A successful response will return a 200 status code, and a response body with th
 > DELETE /amount/{id}
 
 A request to this endpoint will delete the amount record with the specified id value. A successful request will receive a status code 204 in response. 
+
+## Category Endpoints
+>POST /category
+
+A request to this endpoint should contain a JSON body such as the following:
+(all fields are required)
+```json
+{
+    "category": "Example Category"
+}
+```
+
+A correct response should be an HTTP status of 201 and a response body such as the following:
+```json
+{
+    "id": 1,
+    "category": "Example Category"
+}
+```
+>GET /category
+
+A request to this endpoint should return an HTTP status of 200 and a JSON body such as the following:
+
+```json
+{
+    "id": 1,
+    "category": "Example Category"
+},
+{
+    "id": 2,
+    "category": "Another Category"
+},
+{
+    "id": 3,
+    "category": "Yet Another Catgeory"
+}
+```
+>GET /category/id/{id}
+
+A request to this endpoint should contain a number in place of {id} such as the following:
+
+http://localhost:8080/cuttingboard/category/id/1
+
+A correct response should return an HTTP status of 200 and a response body such as the following:
+```json
+{
+    "id": 1,
+    "category": "Example Category"
+}
+```
+>GET /category{name}
+
+A request to this endpoint should contain a number in place of {name} such as the following:
+
+http://localhost:8080/cuttingboard/category/Another
+
+A correct response should return an HTTP status of 200 and a response body such as the following:
+```json
+{
+    "id": 2,
+    "category": "Another Category"
+}
+```
+
