@@ -6,8 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import com.revature.cuttingboard.model.Ingredients;
 import com.revature.cuttingboard.model.ShoppingList;
-import com.revature.cuttingboard.model.SystemUser;
 import com.revature.cuttingboard.utils.HibernateUtility;
 
 /**
@@ -51,6 +51,8 @@ public class ShoppingListDAO {
 				Transaction tx = session.beginTransaction();
 				
 				session.save(shoppingList);
+				Ingredients ingredient = session.get(Ingredients.class, shoppingList.getIngredient().getId());
+				shoppingList.setIngredient(ingredient);
 				
 				tx.commit();
 				session.close();

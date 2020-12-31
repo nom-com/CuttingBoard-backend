@@ -40,7 +40,8 @@ public class AuthenticationService {
 				return null;
 			}
 		} catch (Exception e) {
-			throw new Exception("User not found."); 
+			e.printStackTrace();
+			throw new Exception("User not found.");
 		}
 	}
 }

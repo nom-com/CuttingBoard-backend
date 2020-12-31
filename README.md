@@ -451,8 +451,7 @@ A request to this endpoint should contain a JSON body such as the following:
 {
     "ingredient": 
     {
-        "id":"3",
-        "ingredient": "sugar"
+        "id":"3"
     }
 }
 ```
@@ -475,7 +474,7 @@ A request to this endpoint should return an HTTP status of 200 and a JSON body s
 
 ```json
 {
-    "id": 1:
+    "id": 1
     {
         "id": 1,
         "ingredient":
@@ -497,7 +496,7 @@ A request to this endpoint should return an HTTP status of 200 and a JSON body s
 
 ```json
 {
-    "id": 2:
+    "id": 2
     {
         "id": 1,
         "ingredient":
