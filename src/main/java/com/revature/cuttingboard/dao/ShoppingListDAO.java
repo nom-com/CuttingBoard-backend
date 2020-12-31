@@ -35,8 +35,6 @@ public class ShoppingListDAO {
 		public List<ShoppingList> getShoppingListByUserId(int id) throws Exception {
 			try (Session session = HibernateUtility.getSession()) {
 				Transaction tx = session.beginTransaction();
-				
-//				ShoppingList shoppingList = session.get(ShoppingList.class, id);
 
 				String query = "FROM ShoppingList s WHERE s.systemUser.id = :id";
 				List<ShoppingList> shoppingList = (List<ShoppingList>) session.createQuery(query).setParameter("id",  id).list();
