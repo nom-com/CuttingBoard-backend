@@ -71,7 +71,7 @@ public class Recipe {
 	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date last_update_date;
+	private Date lastUpdateDate;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id")
@@ -85,7 +85,7 @@ public class Recipe {
 	
 
 	public Recipe(String imageLocation, String title, String description, boolean publicRecipe, SystemUser createdBy,
-			Date creationDate, SystemUser lastUpdatedBy, Date last_update_date, Category category) {
+			Date creationDate, SystemUser lastUpdatedBy, Date lastUpdateDate, Category category) {
 		super();
 		this.imageLocation = imageLocation;
 		this.title = title;
@@ -94,14 +94,14 @@ public class Recipe {
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 		this.category = category;
 	}
 
 
 
 	public Recipe(int id, String imageLocation, String title, String description, boolean publicRecipe,
-			SystemUser createdBy, Date creationDate, SystemUser lastUpdatedBy, Date last_update_date,
+			SystemUser createdBy, Date creationDate, SystemUser lastUpdatedBy, Date lastUpdateDate,
 			Category category) {
 		super();
 		this.id = id;
@@ -112,7 +112,7 @@ public class Recipe {
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 		this.category = category;
 	}
 
@@ -206,12 +206,12 @@ public class Recipe {
 		this.category = category;
 	}
 
-	public Date getLast_update_date() {
-		return last_update_date;
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
 	}
 
-	public void setLast_update_date(Date last_update_date) {
-		this.last_update_date = last_update_date;
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public Category getCategory() {
@@ -228,7 +228,7 @@ public class Recipe {
 	public String toString() {
 		return "Recipe [id=" + id + ", imageLocation=" + imageLocation + ", title=" + title + ", description="
 				+ description + ", publicRecipe=" + publicRecipe + ", createdBy=" + createdBy + ", creationDate="
-				+ creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", last_update_date=" + last_update_date
+				+ creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", lastUpdateDate=" + lastUpdateDate
 				+ ", category=" + category + "]";
 	}
 	

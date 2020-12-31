@@ -33,7 +33,7 @@ public class InstructionsRecipe {
 	private int id;
 	
 	@ManyToOne
-	@Cascade(CascadeType.SAVE_UPDATE)
+	@Cascade(CascadeType.ALL)
 	@JoinColumn(name="instructions_id")
 	@NotNull
 	private Instructions instruction;

@@ -37,7 +37,7 @@ public class RecipeAmount {
 	private Recipe recipe;
 	
 	@ManyToOne
-	@Cascade(CascadeType.SAVE_UPDATE)
+	@Cascade(CascadeType.ALL)
 	@JoinColumn(name="amount_id")
 	@NotNull
 	private Amount amount;

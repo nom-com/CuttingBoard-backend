@@ -373,6 +373,18 @@ A request to this endpoint will return a list of all public recipes in the datab
 
 A request to this endpoint will return the recipe with the specified id value. A successful response will contain a 200 status, and will have a response body of a single recipe (same format as a single element from the above response body).
 
+> GET /recipe/{search}
+
+A request to this endpoint will search the database for all recipes whoes titles, descriptions or categories contain the string provided in the request.
+
+A successful response will return a 200 status code and a list of the recipes matching the criteria. (example output matches the GET all detailed above.)
+
+> GET /recipe/category/{id}
+
+A request to this endpoint will return a list of recipes that have the category with the specified id value. This will allow clients to search by category alone. 
+
+Successful responses will also return a 200 status with a list of recipes as shown above. 
+
 > POST /recipe
 
 A request to this endpoint will add a new recipe to the database. A request should be sent with the recipe data in the request body, formatted like the following example: 
@@ -441,6 +453,21 @@ A request to this endpoint will add a new recipe to the database. A request shou
 ```
 
 a successful response will return a status code 201, and a response body with the recipe details. (See GET /recipe for an example of what the output would look like).
+
+> PUT /recipe/{id}
+
+A request to this endpoint will update a recipe with new values. The request body should look identical to that of the POST request, and all values must be included in order to update. 
+
+All values can be changed, and new ingredients and steps can be added. (At this point steps and ingredients cannot be deleted through this endpoint);
+
+A successful request will return a 200 status code with the updated data in the respinse body (also identical to the POST response.)
+
+> DELETE /recipe/{id}
+
+A request to this endpoint will delete the recipe associated with the provided id value. This will also delete all instructions and amounts associated with this recipe, as well as favorites listings. 
+
+A successful response will return a status code 204. 
+
 
 ## Shopping List Endpoints
 >POST /shoppinglist

@@ -1,10 +1,12 @@
 package com.revature.cuttingboard.dao;
 
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.cuttingboard.model.InstructionsRecipe;
+import com.revature.cuttingboard.model.RecipeAmount;
 import com.revature.cuttingboard.utils.HibernateUtility;
 
 /**
@@ -37,6 +39,29 @@ public class InstructionsRecipeDAO {
 			return instructionsRecipe;
 		} catch (Exception e) {
 			throw new Exception("PSQL Error");
+		}
+	}
+	
+	public InstructionsRecipe updateInstructionsRecipe(InstructionsRecipe instructionsRecipe) throws Exception {
+		Session session = HibernateUtility.getSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			InstructionsRecipe dbInstruction = session.load(InstructionsRecipe.class, instructionsRecipe.getId());
+			dbInstruction.getInstruction().setStep(instructionsRecipe.getInstruction().getStep());
+			dbInstruction.setLastUpdatedBy(instructionsRecipe.getLastUpdatedBy());
+			dbInstruction.setLastUpdateDate(instructionsRecipe.getLastUpdateDate());
+			session.update(dbInstruction);
+			
+			return dbInstruction;
+		} catch (ObjectNotFoundException nf) {
+			session.save(instructionsRecipe);
+			return instructionsRecipe;
+		} catch (Exception e) {
+			tx.rollback();
+			throw new Exception("PSQL Error");
+		} finally {
+			tx.commit();
+			session.close();
 		}
 	}
 	
