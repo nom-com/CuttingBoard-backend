@@ -1,7 +1,6 @@
 package com.revature.cuttingboard.model;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +12,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  * Model class to represent the Recipe_amount table of the database
@@ -35,6 +37,7 @@ public class RecipeAmount {
 	private Recipe recipe;
 	
 	@ManyToOne
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name="amount_id")
 	@NotNull
 	private Amount amount;
@@ -57,14 +60,14 @@ public class RecipeAmount {
 	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date last_update_date;
+	private Date lastUpdateDate;
 
 	public RecipeAmount() {
 		super();
 	}
 
 	public RecipeAmount(int id, Recipe recipe, Amount amount, SystemUser createdBy, Date creationDate,
-			SystemUser lastUpdatedBy, Date last_update_date) {
+			SystemUser lastUpdatedBy, Date lastUpdateDate) {
 		super();
 		this.id = id;
 		this.recipe = recipe;
@@ -72,18 +75,18 @@ public class RecipeAmount {
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public RecipeAmount(Recipe recipe, Amount amount, SystemUser createdBy, Date creationDate, SystemUser lastUpdatedBy,
-			Date last_update_date) {
+			Date lastUpdateDate) {
 		super();
 		this.recipe = recipe;
 		this.amount = amount;
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public int getId() {
@@ -134,19 +137,19 @@ public class RecipeAmount {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public Date getLast_update_date() {
-		return last_update_date;
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
 	}
 
-	public void setLast_update_date(Date last_update_date) {
-		this.last_update_date = last_update_date;
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	@Override
 	public String toString() {
 		return "RecipeAmount [id=" + id + ", recipe=" + recipe + ", amount=" + amount + ", createdBy=" + createdBy
-				+ ", creationDate=" + creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", last_update_date="
-				+ last_update_date + "]";
+				+ ", creationDate=" + creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", lastUpdateDate="
+				+ lastUpdateDate + "]";
 	}
 	
 	
