@@ -278,17 +278,28 @@ A request to this endpoint will return a list of all public recipes in the datab
 ```json
 [
     {
-        "id": 1,
-        "imageLocation": "bread.jpeg",
-        "title": "Bread",
-        "description": null,
+        "id": 6,
+        "imageLocation": "pita.jpeg",
+        "title": "Pita",
+        "description": "Roung pita disks",
         "publicRecipe": true,
         "ingredients": [
             {
-                "id": 2,
+                "id": 16,
                 "amount": {
-                    "id": 2,
-                    "amount": "1 tbsp",
+                    "id": 17,
+                    "amount": "1 clove crushed",
+                    "ingredient": {
+                        "id": 1,
+                        "ingredient": "Garlic"
+                    }
+                }
+            },
+            {
+                "id": 15,
+                "amount": {
+                    "id": 16,
+                    "amount": "2 tbsp",
                     "ingredient": {
                         "id": 2,
                         "ingredient": "Salt"
@@ -296,10 +307,10 @@ A request to this endpoint will return a list of all public recipes in the datab
                 }
             },
             {
-                "id": 1,
+                "id": 14,
                 "amount": {
-                    "id": 4,
-                    "amount": "2 cups",
+                    "id": 15,
+                    "amount": "4 cups",
                     "ingredient": {
                         "id": 3,
                         "ingredient": "Flour"
@@ -309,22 +320,50 @@ A request to this endpoint will return a list of all public recipes in the datab
         ],
         "instructions": [
             {
-                "id": 1,
+                "id": 8,
                 "step": {
-                    "id": 1,
-                    "step": "let rise until doubled"
+                    "id": 6,
+                    "step": "knead until smooth"
+                },
+                "stepOrder": 1
+            },
+            {
+                "id": 9,
+                "step": {
+                    "id": 7,
+                    "step": "let rest for 45-90 min"
                 },
                 "stepOrder": 2
             },
             {
-                "id": 2,
+                "id": 10,
                 "step": {
-                    "id": 2,
-                    "step": "knead until smooth"
+                    "id": 8,
+                    "step": "punch down dough"
                 },
-                "stepOrder": 1
+                "stepOrder": 3
+            },
+            {
+                "id": 11,
+                "step": {
+                    "id": 9,
+                    "step": "spread dough out and cut into circles, place each on a greased cookie sheet"
+                },
+                "stepOrder": 4
+            },
+            {
+                "id": 12,
+                "step": {
+                    "id": 10,
+                    "step": "bake at 375 for 27-30 min"
+                },
+                "stepOrder": 5
             }
-        ]
+        ],
+        "category": {
+            "id": 1,
+            "category": "Bread"
+        }
     },
     ...
 ]
