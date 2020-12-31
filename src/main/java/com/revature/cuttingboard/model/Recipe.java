@@ -1,6 +1,7 @@
 package com.revature.cuttingboard.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,6 +45,12 @@ public class Recipe {
 	@Column(name="public")
 	@NotNull
 	private boolean publicRecipe;
+	
+	@OneToMany(mappedBy = "recipe")
+	private List<RecipeAmount> ingredients;
+	
+	@OneToMany(mappedBy = "recipe")
+	private List<InstructionsRecipe> instructions;
 	
 	@ManyToOne
 	@JoinColumn(name="created_by")
@@ -150,6 +158,22 @@ public class Recipe {
 		this.publicRecipe = publicRecipe;
 	}
 
+	public List<RecipeAmount> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<RecipeAmount> ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	public List<InstructionsRecipe> getInstructions() {
+		return instructions;
+	}
+
+	public void setInstructions(List<InstructionsRecipe> instructions) {
+		this.instructions = instructions;
+	}
+
 	public SystemUser getCreatedBy() {
 		return createdBy;
 	}
@@ -188,6 +212,14 @@ public class Recipe {
 
 	public void setLast_update_date(Date last_update_date) {
 		this.last_update_date = last_update_date;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 

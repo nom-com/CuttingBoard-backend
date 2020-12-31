@@ -270,3 +270,135 @@ A correct response should return an HTTP status of 200 and a response body such 
 }
 ```
 
+## Recipe Endpoints
+
+> GET /recipe
+
+A request to this endpoint will return a list of all public recipes in the database. A successful request will return a 200 status, and a response body similar to the following:
+```json
+[
+    {
+        "id": 1,
+        "imageLocation": "bread.jpeg",
+        "title": "Bread",
+        "description": null,
+        "publicRecipe": true,
+        "ingredients": [
+            {
+                "id": 2,
+                "amount": {
+                    "id": 2,
+                    "amount": "1 tbsp",
+                    "ingredient": {
+                        "id": 2,
+                        "ingredient": "Salt"
+                    }
+                }
+            },
+            {
+                "id": 1,
+                "amount": {
+                    "id": 4,
+                    "amount": "2 cups",
+                    "ingredient": {
+                        "id": 3,
+                        "ingredient": "Flour"
+                    }
+                }
+            }
+        ],
+        "instructions": [
+            {
+                "id": 1,
+                "step": {
+                    "id": 1,
+                    "step": "let rise until doubled"
+                },
+                "stepOrder": 2
+            },
+            {
+                "id": 2,
+                "step": {
+                    "id": 2,
+                    "step": "knead until smooth"
+                },
+                "stepOrder": 1
+            }
+        ]
+    },
+    ...
+]
+```
+
+> GET /recipe/id/{id}
+
+A request to this endpoint will return the recipe with the specified id value. A successful response will contain a 200 status, and will have a response body of a single recipe (same format as a single element from the above response body).
+
+> POST /recipe
+
+A request to this endpoint will add a new recipe to the database. A request should be sent with the recipe data in the request body, formatted like the following example: 
+```json
+{
+    "imageLocation": "garlicoil.jpeg",
+    "title": "Garlic Oil",
+    "description": "To die for garlic oil",
+    "publicRecipe": true,
+    "ingredients": [
+        {
+            "amount": {
+                "amount": "12 cloves",
+                "ingredient": {
+                    "id": 1
+                }
+            }
+        },
+        {
+            "amount": {
+                "amount": "2 cups",
+                "ingredient": {
+                    "id": 5
+                }
+            }
+        },
+        {
+            "amount": {
+                "amount": "a pinch",
+                "ingredient": {
+                    "id": 2
+                }
+            }
+        }
+    ],
+    "instructions": [
+        {
+            "step": {
+                "step": "Peel skin off garlic, and place in sauce pan"
+            },
+            "stepOrder": 1
+        },
+        {
+            "step": {
+                "step": "pour oil over garlic"
+            },
+            "stepOrder": 2
+        },
+        {
+            "step": {
+                "step": "sprinkle salt into the garlic and oil mixture, stir to incorporate"
+            },
+            "stepOrder": 3
+        },
+        {
+            "step": {
+                "step": "place in oven at 375 for 2 hours"
+            },
+            "stepOrder": 4
+        }
+    ],
+    "category": {
+        "id": 3
+    }
+}
+```
+
+a successful response will return a status code 201, and a response body with the recipe details. (See GET /recipe for an example of what the output would look like).

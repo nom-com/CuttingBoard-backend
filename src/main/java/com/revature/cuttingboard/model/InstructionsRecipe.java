@@ -14,6 +14,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 /**
  * Model class to represent the instructions_recipe table of the database
  * @author nom.com
@@ -30,6 +33,7 @@ public class InstructionsRecipe {
 	private int id;
 	
 	@ManyToOne
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name="instructions_id")
 	@NotNull
 	private Instructions instruction;
@@ -39,9 +43,9 @@ public class InstructionsRecipe {
 	@NotNull
 	private Recipe recipe;
 	
-	@Column
+	@Column(name="step_order")
 	@NotNull
-	private int order;
+	private int stepOrder;
 	
 	@ManyToOne
 	@JoinColumn(name="created_by")
@@ -61,35 +65,35 @@ public class InstructionsRecipe {
 	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date last_update_date;
+	private Date lastUpdateDate;
 
 	public InstructionsRecipe() {
 		super();
 	}
 
-	public InstructionsRecipe(int id, Instructions instruction, Recipe recipe, int order, SystemUser createdBy,
-			Date creationDate, SystemUser lastUpdatedBy, Date last_update_date) {
+	public InstructionsRecipe(int id, Instructions instruction, Recipe recipe, int stepOrder, SystemUser createdBy,
+			Date creationDate, SystemUser lastUpdatedBy, Date lastUpdateDate) {
 		super();
 		this.id = id;
 		this.instruction = instruction;
 		this.recipe = recipe;
-		this.order = order;
+		this.stepOrder = stepOrder;
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
-	public InstructionsRecipe(Instructions instruction, Recipe recipe, int order, SystemUser createdBy,
-			Date creationDate, SystemUser lastUpdatedBy, Date last_update_date) {
+	public InstructionsRecipe(Instructions instruction, Recipe recipe, int stepOrder, SystemUser createdBy,
+			Date creationDate, SystemUser lastUpdatedBy, Date lastUpdateDate) {
 		super();
 		this.instruction = instruction;
 		this.recipe = recipe;
-		this.order = order;
+		this.stepOrder = stepOrder;
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public int getId() {
@@ -116,12 +120,12 @@ public class InstructionsRecipe {
 		this.recipe = recipe;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getStepOrder() {
+		return stepOrder;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setStepOrder(int stepOrder) {
+		this.stepOrder = stepOrder;
 	}
 
 	public SystemUser getCreatedBy() {
@@ -148,19 +152,19 @@ public class InstructionsRecipe {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public Date getLast_update_date() {
-		return last_update_date;
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
 	}
 
-	public void setLast_update_date(Date last_update_date) {
-		this.last_update_date = last_update_date;
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "InstructionsRecipe [id=" + id + ", instruction=" + instruction + ", recipe=" + recipe + ", order="
-				+ order + ", createdBy=" + createdBy + ", creationDate=" + creationDate + ", lastUpdatedBy="
-				+ lastUpdatedBy + ", last_update_date=" + last_update_date + "]";
+		return "InstructionsRecipe [id=" + id + ", instruction=" + instruction + ", recipe=" + recipe + ", stepOrder="
+				+ stepOrder + ", createdBy=" + createdBy + ", creationDate=" + creationDate + ", lastUpdatedBy="
+				+ lastUpdatedBy + ", lastUpdateDate=" + lastUpdateDate + "]";
 	}
 	
 	

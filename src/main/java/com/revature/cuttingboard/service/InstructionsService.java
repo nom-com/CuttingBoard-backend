@@ -29,7 +29,7 @@ public class InstructionsService {
 			//Set values
 			Date today = new Date();
 			instructions.setCreationDate(today);
-			instructions.setLast_update_date(today);
+			instructions.setLastUpdateDate(today);
 			instructions.setCreatedBy(user);
 			instructions.setLastUpdatedBy(user);
 			

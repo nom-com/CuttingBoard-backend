@@ -52,31 +52,31 @@ public class Instructions {
 	@Column(name = "last_update_date")
 	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date last_update_date;
+	private Date lastUpdateDate;
 
 	public Instructions() {
 		super();
 	}
 
 	public Instructions(int id, String step, SystemUser createdBy, Date creationDate, SystemUser lastUpdatedBy,
-			Date last_update_date) {
+			Date lastUpdateDate) {
 		super();
 		this.id = id;
 		this.step = step;
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public Instructions(String step, SystemUser createdBy, Date creationDate, SystemUser lastUpdatedBy,
-			Date last_update_date) {
+			Date lastUpdateDate) {
 		super();
 		this.step = step;
 		this.createdBy = createdBy;
 		this.creationDate = creationDate;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.last_update_date = last_update_date;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	public int getId() {
@@ -119,18 +119,18 @@ public class Instructions {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public Date getLast_update_date() {
-		return last_update_date;
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
 	}
 
-	public void setLast_update_date(Date last_update_date) {
-		this.last_update_date = last_update_date;
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Instructions [id=" + id + ", step=" + step + ", createdBy=" + createdBy + ", creationDate="
-				+ creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", last_update_date=" + last_update_date + "]";
+				+ creationDate + ", lastUpdatedBy=" + lastUpdatedBy + ", lastUpdateDate=" + lastUpdateDate + "]";
 	}
 	
 	

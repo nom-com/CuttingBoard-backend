@@ -109,7 +109,7 @@ CREATE TABLE instructions_recipe
 ( instructions_recipe_id SERIAL PRIMARY KEY 
 , instructions_id INT NOT NULL
 , recipe_id INT NOT NULL
-, "ORDER" INT NOT NULL
+, step_order INT NOT NULL
 , created_by INT NOT NULL
 , creation_date DATE NOT NULL
 , last_updated_by INT NOT NULL
