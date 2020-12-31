@@ -40,6 +40,7 @@ public class SystemUserDAO {
 			session.close();
 			return user;
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new Exception("User not found.");
 		}
 	}
