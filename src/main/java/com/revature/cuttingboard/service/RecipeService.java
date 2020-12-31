@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.cuttingboard.dao.AmountDAO;
+import com.revature.cuttingboard.dao.CategoryDAO;
+import com.revature.cuttingboard.dao.IngredientsDAO;
 import com.revature.cuttingboard.dao.InstructionsRecipeDAO;
 import com.revature.cuttingboard.dao.RecipeAmountDAO;
 import com.revature.cuttingboard.dao.RecipeDAO;
@@ -40,7 +42,9 @@ public class RecipeService {
 	@Autowired
 	private InstructionsRecipeDAO instructionsRecipeDao;
 	@Autowired
-	private AmountDAO amountDao;
+	private CategoryDAO categoryDao;
+	@Autowired
+	private IngredientsDAO ingredientsDao;
 
 	public List<RecipeDTO> getAllRecipes() throws Exception {
 		List<RecipeDTO> recipes = convertLists(recipeDao.getAllRecipes());
@@ -50,6 +54,18 @@ public class RecipeService {
 	
 	public RecipeDTO getRecipeById(int id) throws Exception {
 		return new RecipeDTO(recipeDao.getRecipeById(id));
+	}
+	
+	public List<RecipeDTO> searchRecipes(String search) throws Exception {
+		List<RecipeDTO> recipes = convertLists(recipeDao.searchRecipe(search));
+
+		return recipes;
+	}
+	
+	public List<RecipeDTO> searchRecipesByCategory(int id) throws Exception {
+		List<RecipeDTO> recipes = convertLists(recipeDao.searchRecipesByCategory(id));
+
+		return recipes;
 	}
 	
 	public RecipeDTO insertRecipe(RecipeDTO recipeData, SystemUser user) throws Exception {
@@ -69,6 +85,58 @@ public class RecipeService {
 			instructionsRecipeDao.insertInstuctionsRecipe(step);
 		}
 		return new RecipeDTO(recipeDao.getRecipeById(recipe.getId()));
+	}
+	
+	public RecipeDTO updateRecipe(RecipeDTO recipeData, int id,  SystemUser user) throws Exception {
+		Date today = new Date();
+		recipeData.setId(id);
+		
+		Recipe dbRecipe = recipeDao.getRecipeById(id);
+		dbRecipe.setImageLocation(recipeData.getImageLocation());
+		dbRecipe.setTitle(recipeData.getTitle());
+		dbRecipe.setDescription(recipeData.getDescription());
+		dbRecipe.setPublicRecipe(recipeData.isPublicRecipe());
+		dbRecipe.setLastUpdatedBy(user);
+		dbRecipe.setLastUpdateDate(today);
+		Category c = categoryDao.getCategoryById(recipeData.getCategory().getId());
+		dbRecipe.setCategory(c);
+		dbRecipe.setIngredients(convertRecipeAmountDTOLists(dbRecipe.getIngredients(), recipeData.getIngredients(), dbRecipe.getId(), user));
+		dbRecipe.setInstructions(convertInstructionsRecipeDTOLists(dbRecipe.getInstructions(), recipeData.getInstructions(), id, user));
+		
+		for (RecipeAmount recipeAmount: dbRecipe.getIngredients()) {
+			recipeAmountDao.updateRecipeAmount(recipeAmount);
+			recipeAmount.getAmount().setIngredient(ingredientsDao.getIngredientById(recipeAmount.getAmount().getIngredient().getId()));
+		}
+		
+		for (InstructionsRecipe instructionsRecipe: dbRecipe.getInstructions()) {
+			instructionsRecipeDao.updateInstructionsRecipe(instructionsRecipe);
+		}
+		
+		return new RecipeDTO(recipeDao.updateRecipe(dbRecipe));
+	}
+	
+	public boolean deleteRecipe(int id) {
+		Recipe dbRecipe;
+		try {
+			dbRecipe = recipeDao.getRecipeById(id);
+			
+			for (RecipeAmount recipeAmount: dbRecipe.getIngredients()) {
+				recipeAmountDao.deleteRecipeAmount(recipeAmount.getId());
+			}
+			
+			for (InstructionsRecipe instructionsRecipe: dbRecipe.getInstructions()) {
+				instructionsRecipeDao.deleteInstructionsRecipe(instructionsRecipe.getId());
+			}
+			
+			recipeDao.deleteRecipe(dbRecipe.getId());
+			
+			
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 	private List<RecipeDTO> convertLists(List<Recipe> dbRecipes) {
@@ -109,6 +177,42 @@ public class RecipeService {
 		return amounts;
 	}
 	
+	private List<RecipeAmount> convertRecipeAmountDTOLists(List<RecipeAmount> dbRecipeAmounts, List<RecipeAmountDTO> recipeAmounts, int id, SystemUser user) {
+		Date today = new Date();
+		Recipe recipe = new Recipe();
+		recipe.setId(id);
+		
+		for (int i = 0; i < recipeAmounts.size(); i++) {
+			
+			if (i < dbRecipeAmounts.size()) {
+				dbRecipeAmounts.get(i).getAmount().setAmount(recipeAmounts.get(i).getAmount().getAmount());
+				dbRecipeAmounts.get(i).getAmount().getIngredient().setId(recipeAmounts.get(i).getAmount().getIngredient().getId());
+				dbRecipeAmounts.get(i).getAmount().setLastUpdateDate(today);
+				dbRecipeAmounts.get(i).getAmount().setLastUpdatedBy(user);
+			} else {
+				RecipeAmount amount = new RecipeAmount();
+				amount.setRecipe(recipe);
+				amount.setAmount(new Amount());
+				amount.getAmount().setAmount(recipeAmounts.get(i).getAmount().getAmount());
+				amount.getAmount().setIngredient(new Ingredients());
+				amount.getAmount().getIngredient().setId(recipeAmounts.get(i).getAmount().getIngredient().getId());
+				amount.getAmount().setCreatedBy(user);
+				amount.getAmount().setCreationDate(today);
+				amount.getAmount().setLastUpdatedBy(user);
+				amount.getAmount().setLastUpdateDate(today);
+				amount.setCreatedBy(user);
+				amount.setCreationDate(today);
+				dbRecipeAmounts.add(amount);
+			}
+
+			dbRecipeAmounts.get(i).setLastUpdatedBy(user);
+			dbRecipeAmounts.get(i).setLastUpdateDate(today);
+
+		}
+		
+		return dbRecipeAmounts;
+	}
+	
 	private List<InstructionsRecipe> convertInstructionsRecipeDTOLists(List<InstructionsRecipeDTO> instructionsData, int id, SystemUser user){
 		Date today = new Date();
 		List<InstructionsRecipe> instructions = new ArrayList<InstructionsRecipe>();
@@ -133,5 +237,39 @@ public class RecipeService {
 		}
 		
 		return instructions;
+	}
+	
+	private List<InstructionsRecipe> convertInstructionsRecipeDTOLists(List<InstructionsRecipe> instructionsRecipe, List<InstructionsRecipeDTO> instructionsData, int id, SystemUser user){
+		Date today = new Date();
+		Recipe recipeId = new Recipe();
+		recipeId.setId(id);
+		
+		for (int i = 0; i < instructionsData.size(); i++) {
+			
+			if (i < instructionsRecipe.size()) {
+				instructionsRecipe.get(i).getInstruction().setStep(instructionsData.get(i).getStep().getStep());
+				instructionsRecipe.get(i).getInstruction().setLastUpdatedBy(user);
+				instructionsRecipe.get(i).getInstruction().setLastUpdateDate(today);
+				instructionsRecipe.get(i).setStepOrder(instructionsData.get(i).getStepOrder());
+				instructionsRecipe.get(i).setLastUpdatedBy(user);
+				instructionsRecipe.get(i).setLastUpdateDate(today);
+			} else {
+				InstructionsRecipe instruction = new InstructionsRecipe();
+				instruction.setRecipe(recipeId);
+				instruction.setInstruction(new Instructions(instructionsData.get(i).getStep().getStep(), user, today, user, today));
+				instruction.setStepOrder(instructionsData.get(i).getStepOrder());
+				instruction.setCreatedBy(user);
+				instruction.setCreationDate(today);
+				instruction.setLastUpdatedBy(user); 
+				instruction.setLastUpdateDate(today);
+				instructionsRecipe.add(instruction);
+			}
+			
+			
+			instructionsRecipe.get(i).setLastUpdatedBy(user);
+			instructionsRecipe.get(i).setLastUpdateDate(today);
+		}
+		
+		return instructionsRecipe;
 	}
 }

@@ -48,6 +48,46 @@ public class RecipeDAO {
 			throw new Exception("PSQL Error");
 		}
 	}
+	
+	public List<Recipe> searchRecipe(String search) throws Exception {
+		try (Session session = HibernateUtility.getSession()) {
+
+			List<Recipe> recipe = session.createQuery("Select distinct r FROM Recipe r left join fetch r.ingredients "
+					+ "WHERE (LOWER(r.title) like LOWER(:search) OR LOWER(r.description) like LOWER(:desc) OR LOWER(r.category.category) LIKE LOWER(:cat)) AND r.publicRecipe is true")
+					.setParameter("search", "%" + search + "%")
+					.setParameter("desc", "%" + search + "%")
+					.setParameter("cat", "%" + search + "%")
+					.getResultList();
+			recipe = session.createQuery("Select distinct r FROM Recipe r left join fetch r.instructions "
+					+ "WHERE (LOWER(r.title) like LOWER(:search) OR LOWER(r.description) like LOWER(:desc)OR LOWER(r.category.category) LIKE LOWER(:cat)) AND r.publicRecipe is true") 
+					.setParameter("search", "%" + search + "%")
+					.setParameter("desc", "%" + search + "%")
+					.setParameter("cat", "%" + search + "%")
+					.getResultList();
+
+			return recipe;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("PSQL Error");
+		}
+	}
+	
+	public List<Recipe> searchRecipesByCategory(int id) throws Exception {
+		try (Session session = HibernateUtility.getSession()) {
+
+			List<Recipe> recipe = session.createQuery("Select distinct r FROM Recipe r left join fetch r.ingredients WHERE r.category.id = :id AND r.publicRecipe is true") 
+					.setParameter("id", id)
+					.getResultList();
+			recipe = session.createQuery("Select distinct r FROM Recipe r left join fetch r.instructions WHERE r.category.id = :id AND r.publicRecipe is true") 
+					.setParameter("id", id)
+					.getResultList();
+
+			return recipe;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("PSQL Error");
+		}
+	}
 
 	public Recipe insertRecipe(Recipe recipe) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {

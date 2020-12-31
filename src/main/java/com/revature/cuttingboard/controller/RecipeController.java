@@ -5,9 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,6 +60,30 @@ public class RecipeController {
 		}
 	}
 	
+	@GetMapping("/{search}")
+	@AuthenticatedEndpoint
+	public List<RecipeDTO> searchRecipes(@PathVariable("search") String search, SystemUser user) {
+		try {
+			return recipeService.searchRecipes(search);
+		} catch (Exception e) {
+			res.setStatus(400);
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@GetMapping("/category/{id}")
+	@AuthenticatedEndpoint
+	public List<RecipeDTO> searchRecipesByCategory(@PathVariable("id") int id, SystemUser user) {
+		try {
+			return recipeService.searchRecipesByCategory(id);
+		} catch (Exception e) {
+			res.setStatus(400);
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	@PostMapping("")
 	@AuthenticatedEndpoint
 	public RecipeDTO insertRecipe(@RequestBody RecipeDTO recipeData, SystemUser user) {
@@ -68,6 +94,28 @@ public class RecipeController {
 			res.setStatus(400);
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	@PutMapping("/{id}")
+	@AuthenticatedEndpoint
+	public RecipeDTO updateRecipe(@PathVariable("id") int id, @RequestBody RecipeDTO recipeData, SystemUser user) {
+		try {
+			return recipeService.updateRecipe(recipeData, id, user);
+		} catch (Exception e) {
+			res.setStatus(400);
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@DeleteMapping("/{id}")
+	@AuthenticatedEndpoint
+	public void deleteRecipe(@PathVariable("id") int id, SystemUser user) {
+		if (recipeService.deleteRecipe(id)) {
+			res.setStatus(204);
+		} else {
+			res.setStatus(400);
 		}
 	}
 }
