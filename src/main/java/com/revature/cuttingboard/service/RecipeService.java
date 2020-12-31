@@ -42,8 +42,6 @@ public class RecipeService {
 	@Autowired
 	private InstructionsRecipeDAO instructionsRecipeDao;
 	@Autowired
-	private AmountDAO amountDao;
-	@Autowired
 	private CategoryDAO categoryDao;
 	@Autowired
 	private IngredientsDAO ingredientsDao;
