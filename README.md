@@ -441,3 +441,78 @@ A request to this endpoint will add a new recipe to the database. A request shou
 ```
 
 a successful response will return a status code 201, and a response body with the recipe details. (See GET /recipe for an example of what the output would look like).
+
+## Shopping List Endpoints
+>POST /shoppinglist
+
+A request to this endpoint should contain a JSON body such as the following:
+(all fields are required)
+```json
+{
+    "ingredient": 
+    {
+        "id":"3",
+        "ingredient": "sugar"
+    }
+}
+```
+
+A correct response should be an HTTP status of 201 and a response body such as the following:
+```json
+{
+    "id": 1,
+    "ingredient":
+    {
+        "id": 3,
+        "ingredient": "sugar"
+     }
+}
+```
+
+>GET /shoppinglist
+
+A request to this endpoint should return an HTTP status of 200 and a JSON body such as the following:
+
+```json
+{
+    "id": 1:
+    {
+        "id": 1,
+        "ingredient":
+        {
+            "id": 3,
+            "ingredient": "sugar"
+         }
+    }
+}
+```
+
+>GET /shoppinglist/id/{id}
+
+A request to this endpoint should contain a number in place of {id} such as the following:
+
+http://localhost:8080/cuttingboard/shoppinglist/id/2
+
+A request to this endpoint should return an HTTP status of 200 and a JSON body such as the following:
+
+```json
+{
+    "id": 2:
+    {
+        "id": 1,
+        "ingredient":
+        {
+            "id": 4,
+            "ingredient": "flour"
+         }
+    }
+}
+```
+
+>DELETE /shoppinglist/{id}
+
+A request to this endpoint should contain a number in place of {id} such as the following:
+
+http://localhost:8080/cuttingboard/shoppinglist/1
+
+A correct response should return an HTTP status of 204 and an empty response body.
