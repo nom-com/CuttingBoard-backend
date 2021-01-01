@@ -32,6 +32,7 @@ public class ShoppingListDAO {
 			}
 		}
 		
+		@SuppressWarnings("unchecked")
 		public List<ShoppingList> getShoppingListByUserId(int id) throws Exception {
 			try (Session session = HibernateUtility.getSession()) {
 				Transaction tx = session.beginTransaction();

@@ -28,8 +28,6 @@ public class AuthenticationService {
 			String currentUsername = user.getUsername();
 			String currentPassword = user.getPassword();
 			SystemUser storedUser = (SystemUser)systemUserDao.getUserByUsername(currentUsername);
-			String storedId = String.valueOf(storedUser.getId());
-			String storedUsername = storedUser.getUsername();
 			String storedPassword = storedUser.getPassword();
 			String storedSalt = storedUser.getSalt();
 			

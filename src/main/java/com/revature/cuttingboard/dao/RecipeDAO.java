@@ -1,5 +1,6 @@
 package com.revature.cuttingboard.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -19,12 +20,32 @@ import com.revature.cuttingboard.utils.HibernateUtility;
 @Repository
 public class RecipeDAO {
 
+	@SuppressWarnings("unchecked")
 	public List<Recipe> getAllRecipes() throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 
-			List<Recipe> recipes = session.createQuery("Select distinct r FROM Recipe r join fetch r.ingredients WHERE r.publicRecipe is true").getResultList();
-			recipes = session.createQuery("Select distinct r FROM Recipe r join fetch r.instructions WHERE r.publicRecipe is true").getResultList();
+			List<Recipe> recipes = session.createQuery("Select distinct r FROM Recipe r join fetch r.ingredients "
+					+ "WHERE r.publicRecipe is true").getResultList();
+			recipes = session.createQuery("Select distinct r FROM Recipe r join fetch r.instructions "
+					+ "WHERE r.publicRecipe is true").getResultList();
 
+			return recipes;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("PSQL Error");
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Recipe> getRecommendedRecipes() throws Exception {
+		try (Session session = HibernateUtility.getSession()) {
+
+			List<Recipe> recipes = new ArrayList<Recipe>();
+			List<Object[]> favs = session.createQuery("SELECT u.recipe.id, COUNT(u.systemUser) FROM UserFavorites u inner join u.recipe r "
+					+ "WHERE r.publicRecipe is true GROUP BY u.recipe.id ORDER BY COUNT(u.systemUser) desc").setMaxResults(10).getResultList();
+			for (Object[] f: favs) {
+				recipes.add(getRecipeById((int) f[0]));
+			}
 			return recipes;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,10 +56,12 @@ public class RecipeDAO {
 	public Recipe getRecipeById(int id) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 
-			Recipe recipe = (Recipe) session.createQuery("Select distinct r FROM Recipe r left join fetch r.ingredients WHERE r.id = :id") 
+			Recipe recipe = (Recipe) session.createQuery("Select distinct r FROM Recipe r left join fetch r.ingredients "
+					+ "WHERE r.id = :id") 
 					.setParameter("id", id)
 					.getSingleResult();
-			recipe = (Recipe) session.createQuery("Select distinct r FROM Recipe r left join fetch r.instructions WHERE r.id = :id") 
+			recipe = (Recipe) session.createQuery("Select distinct r FROM Recipe r left join fetch r.instructions "
+					+ "WHERE r.id = :id") 
 					.setParameter("id", id)
 					.getSingleResult();
 
@@ -49,6 +72,7 @@ public class RecipeDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Recipe> searchRecipe(String search) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 
@@ -72,6 +96,7 @@ public class RecipeDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Recipe> searchRecipesByCategory(int id) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 

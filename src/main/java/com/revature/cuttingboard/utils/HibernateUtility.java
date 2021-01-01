@@ -3,7 +3,6 @@ package com.revature.cuttingboard.utils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.stereotype.Component;
 
 public class HibernateUtility {
 	

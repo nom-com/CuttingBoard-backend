@@ -1,6 +1,5 @@
 package com.revature.cuttingboard.dto;
 
-import com.revature.cuttingboard.model.Ingredients;
 import com.revature.cuttingboard.model.ShoppingList;
 
 public class ShoppingListDTO {

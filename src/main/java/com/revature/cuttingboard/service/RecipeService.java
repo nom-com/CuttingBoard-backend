@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.cuttingboard.dao.AmountDAO;
 import com.revature.cuttingboard.dao.CategoryDAO;
 import com.revature.cuttingboard.dao.IngredientsDAO;
 import com.revature.cuttingboard.dao.InstructionsRecipeDAO;
@@ -48,6 +47,12 @@ public class RecipeService {
 
 	public List<RecipeDTO> getAllRecipes() throws Exception {
 		List<RecipeDTO> recipes = convertLists(recipeDao.getAllRecipes());
+
+		return recipes;
+	}
+	
+	public List<RecipeDTO> getRecommendedRecipes() throws Exception {
+		List<RecipeDTO> recipes = convertLists(recipeDao.getRecommendedRecipes());
 
 		return recipes;
 	}

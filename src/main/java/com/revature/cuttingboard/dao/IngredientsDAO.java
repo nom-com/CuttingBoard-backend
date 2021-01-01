@@ -25,7 +25,7 @@ public class IngredientsDAO {
 		try (Session session = HibernateUtility.getSession()) {
 			Transaction tx = session.beginTransaction();
 			
-			CriteriaQuery query = session.getCriteriaBuilder().createQuery(Ingredients.class);
+			CriteriaQuery<Ingredients> query = session.getCriteriaBuilder().createQuery(Ingredients.class);
 			Root<Ingredients> root = query.from(Ingredients.class);
 			query.select(root);
 			
@@ -38,6 +38,7 @@ public class IngredientsDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ingredients> searchIngredient(String ingredient) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 			Transaction tx = session.beginTransaction();
