@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.cuttingboard.dao.ShoppingListDAO;
-import com.revature.cuttingboard.dto.IngredientsDTO;
 import com.revature.cuttingboard.dto.ShoppingListDTO;
 import com.revature.cuttingboard.model.ShoppingList;
 import com.revature.cuttingboard.model.SystemUser;

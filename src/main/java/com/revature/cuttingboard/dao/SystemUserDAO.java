@@ -33,7 +33,6 @@ public class SystemUserDAO {
 	
 	public SystemUser getUserByUsername(String username) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
-			Transaction tx = session.beginTransaction();
 			String query = "FROM SystemUser s WHERE s.username = :username";
 			SystemUser user = (SystemUser) session.createQuery(query).setParameter("username",  username).getSingleResult();
 			

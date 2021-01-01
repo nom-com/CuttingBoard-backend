@@ -47,6 +47,16 @@ public class RecipeController {
 		}
 	}
 	
+	@GetMapping("/recommended")	
+	public List<RecipeDTO> getRecommendedRecipes() {
+		try {
+			return recipeService.getRecommendedRecipes();
+		} catch (Exception e) {
+			res.setStatus(400);
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	@GetMapping("/id/{id}")
 	@AuthenticatedEndpoint

@@ -6,7 +6,6 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.cuttingboard.model.InstructionsRecipe;
-import com.revature.cuttingboard.model.RecipeAmount;
 import com.revature.cuttingboard.utils.HibernateUtility;
 
 /**

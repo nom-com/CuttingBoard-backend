@@ -131,7 +131,8 @@ CREATE TABLE user_favorites
 , CONSTRAINT fk_user_favorites_1 FOREIGN KEY (recipe_id) 
 	REFERENCES recipe(recipe_id)
 , CONSTRAINT fk_user_favorites_2 FOREIGN KEY (system_user_id)
-	REFERENCES system_user(system_user_id));
+	REFERENCES system_user(system_user_id)
+, CONSTRAINT uq_system_user_1 UNIQUE (recipe_id, system_user_id));
 	
 CREATE TABLE shopping_list
 ( shopping_list_id SERIAL PRIMARY KEY

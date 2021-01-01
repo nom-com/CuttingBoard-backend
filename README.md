@@ -369,6 +369,16 @@ A request to this endpoint will return a list of all public recipes in the datab
 ]
 ```
 
+> GET /recipe/recommended
+
+A request to this endpoint will return the top 10 recipies from the database. This is determined by the recipies that have been favorited the most by the users. 
+
+A successful response will return a list of the top 10 most popular recipes, in the same format as the above response. A successful request will also have a status code 200.
+
+No authentication is needed for this particular endpoint. 
+
+
+
 > GET /recipe/id/{id}
 
 A request to this endpoint will return the recipe with the specified id value. A successful response will contain a 200 status, and will have a response body of a single recipe (same format as a single element from the above response body).

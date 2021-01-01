@@ -18,6 +18,7 @@ import com.revature.cuttingboard.utils.HibernateUtility;
 @Repository
 public class CategoryDAO {
 
+	@SuppressWarnings("unchecked")
 	public List<Category> getAllCategories() throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 			List<Category> categories = (List<Category>) session.createQuery("From Category c").list();
@@ -57,6 +58,7 @@ public class CategoryDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Category> searchCategory(String category) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 			Transaction tx = session.beginTransaction();

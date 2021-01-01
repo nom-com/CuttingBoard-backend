@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.revature.cuttingboard.model.Category;
 import com.revature.cuttingboard.model.InstructionsRecipe;
 import com.revature.cuttingboard.model.Recipe;
 import com.revature.cuttingboard.model.RecipeAmount;
