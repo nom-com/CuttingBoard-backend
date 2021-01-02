@@ -2,11 +2,18 @@ package com.revature.cuttingboard.service;
 
 import java.util.Date;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.cuttingboard.dao.SystemUserDAO;
 import com.revature.cuttingboard.dto.SystemUserDTO;
+import com.revature.cuttingboard.exception.EmailAlreadyExists;
+import com.revature.cuttingboard.exception.EmailNotFound;
+import com.revature.cuttingboard.exception.PSQLException;
+import com.revature.cuttingboard.exception.UserAlreadyExists;
+import com.revature.cuttingboard.exception.UserNotFound;
 import com.revature.cuttingboard.model.SystemUser;
 import com.revature.cuttingboard.utils.PasswordHashingUtility;
 
@@ -27,6 +34,8 @@ public class SystemUserService {
 	
 	
 	public SystemUserDTO createUser(SystemUser newUser) throws Exception {
+		checkUsername(newUser.getUsername());
+		checkEmail(newUser.getEmail());
 		// setting common values
 		Date today = new Date();
 		newUser.setCreationDate(today);
@@ -41,5 +50,27 @@ public class SystemUserService {
 		//insert user
 		SystemUser user = systemUserDao.insertUser(newUser);
 		return new SystemUserDTO(user);
+	}
+	
+	//Checks for existing username
+	private boolean checkUsername(String user) throws Exception {
+		try {
+			systemUserDao.getUserByUsername(user);
+			throw new UserAlreadyExists();
+		} catch (UserNotFound e) {
+			return true;
+		}
+		
+	}
+	
+	//Checks for existing email
+	private boolean checkEmail(String user) throws Exception {
+		try {
+			SystemUser dbEmail = systemUserDao.getUserByEmail(user);
+			throw new EmailAlreadyExists();
+		} catch (EmailNotFound e) {
+			return true;
+		}
+		
 	}
 }
