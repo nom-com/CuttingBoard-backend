@@ -60,10 +60,10 @@ public class UserFavoritesController {
 	
 	@PostMapping("/{id}")
 	@AuthenticatedEndpoint
-	public UserFavoritesDTO insertUserFavorites(@PathVariable("id") int id, UserFavorites userFavorites, SystemUser user) {
+	public UserFavoritesDTO insertUserFavorites(@PathVariable("id") int id, SystemUser user) {
 		try {
 			resp.setStatus(201);
-			return userFavService.insertUserFavorites(id, userFavorites, user);
+			return userFavService.insertUserFavorites(id, user);
 		} catch (Exception e) {
 			resp.setStatus(400);
 			e.printStackTrace();

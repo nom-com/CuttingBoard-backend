@@ -28,7 +28,8 @@ public class UserFavoritesService {
 	@Autowired
 	RecipeService recipeService;
 	
-	public UserFavoritesDTO insertUserFavorites(int id, UserFavorites userFavorites, SystemUser user) throws Exception {
+	public UserFavoritesDTO insertUserFavorites(int id, SystemUser user) throws Exception {
+		UserFavorites userFavorites = new UserFavorites();
 		Date today = new Date();
 		Recipe recipe = new Recipe();
 		recipe.setId(id);

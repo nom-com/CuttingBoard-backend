@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import com.revature.cuttingboard.model.Ingredients;
 import com.revature.cuttingboard.model.RecipeAmount;
 import com.revature.cuttingboard.utils.HibernateUtility;
 
@@ -47,6 +48,8 @@ public class RecipeAmountDAO {
 		try {
 			RecipeAmount dbRecipeAmount = session.load(RecipeAmount.class, recipeAmount.getId());
 			dbRecipeAmount.getAmount().setAmount(recipeAmount.getAmount().getAmount());
+			Ingredients ingredient = session.load(Ingredients.class, recipeAmount.getAmount().getIngredient().getId());
+			dbRecipeAmount.getAmount().setIngredient(ingredient);
 			dbRecipeAmount.setLastUpdatedBy(recipeAmount.getLastUpdatedBy());
 			dbRecipeAmount.setLastUpdateDate(recipeAmount.getLastUpdateDate());
 			session.update(dbRecipeAmount);
