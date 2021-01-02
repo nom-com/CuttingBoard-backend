@@ -552,3 +552,64 @@ A request to this endpoint should contain a number in place of {id} such as the 
 http://localhost:8080/cuttingboard/shoppinglist/1
 
 A correct response should return an HTTP status of 204 and an empty response body.
+
+## User Favorites Endpoints
+>POST /favorites/{id}
+
+A request to this endpoint should contain a number (the id of the recipe) in place of {id} such as the following:
+
+http://localhost:8080/cuttingboard/favorites/1
+
+A correct response should be an HTTP status of 201 and a response body such as the following:
+```json
+{
+    "id": 8,
+    "recipe": {
+        "id": 1,
+        "imageLocation": "image.jpg",
+        "title": "f",
+        "description": "f",
+        "publicRecipe": false,
+        "ingredients": [],
+        "instructions": [],
+        "category": {
+            "id": 1,
+            "category": "Test Category"
+        }
+    }
+}
+```
+
+>GET /favorites
+
+A request to this endpoint should return an HTTP status of 200 and a JSON body such as the following:
+
+```json
+[
+    {
+        "id": 5,
+        "recipe": {
+            "id": 2,
+            "imageLocation": "image.jpg",
+            "title": "f",
+            "description": "f",
+            "publicRecipe": false,
+            "ingredients": [],
+            "instructions": [],
+            "category": {
+                "id": 2,
+                "category": "Another Category"
+            }
+        }
+    }
+]
+```
+```
+
+>DELETE /favorites/{id}
+
+A request to this endpoint should contain a number (the id of the recipe) in place of {id} such as the following:
+
+http://localhost:8080/cuttingboard/favrites/1
+
+A correct response should return an HTTP status of 204 and an empty response body.
