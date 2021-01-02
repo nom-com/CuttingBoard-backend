@@ -1,5 +1,7 @@
 package com.revature.cuttingboard.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,12 @@ public class SystemUserController {
 			return systemUserService.createUser(newUser);
 		} catch (Exception e) {
 			res.setStatus(400);
+			try {
+				res.getWriter().append(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
 			return null;
 		}
 	}
