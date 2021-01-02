@@ -12,6 +12,7 @@ import com.revature.cuttingboard.dao.IngredientsDAO;
 import com.revature.cuttingboard.dao.InstructionsRecipeDAO;
 import com.revature.cuttingboard.dao.RecipeAmountDAO;
 import com.revature.cuttingboard.dao.RecipeDAO;
+import com.revature.cuttingboard.dao.UserFavoritesDAO;
 import com.revature.cuttingboard.dto.InstructionsRecipeDTO;
 import com.revature.cuttingboard.dto.RecipeAmountDTO;
 import com.revature.cuttingboard.dto.RecipeDTO;
@@ -23,6 +24,7 @@ import com.revature.cuttingboard.model.InstructionsRecipe;
 import com.revature.cuttingboard.model.Recipe;
 import com.revature.cuttingboard.model.RecipeAmount;
 import com.revature.cuttingboard.model.SystemUser;
+import com.revature.cuttingboard.model.UserFavorites;
 
 /**
  * Service class to handle business logic pertaining to recipes
@@ -44,6 +46,8 @@ public class RecipeService {
 	private CategoryDAO categoryDao;
 	@Autowired
 	private IngredientsDAO ingredientsDao;
+	@Autowired
+	private UserFavoritesDAO userFavsDao;
 
 	public List<RecipeDTO> getAllRecipes() throws Exception {
 		List<RecipeDTO> recipes = convertLists(recipeDao.getAllRecipes());
@@ -89,6 +93,8 @@ public class RecipeService {
 		for(InstructionsRecipe step: instructions) {
 			instructionsRecipeDao.insertInstuctionsRecipe(step);
 		}
+		UserFavorites fav = new UserFavorites(recipe, user, today);
+		userFavsDao.insertUserFavorites(fav);
 		return new RecipeDTO(recipeDao.getRecipeById(recipe.getId()));
 	}
 	
@@ -109,6 +115,7 @@ public class RecipeService {
 		dbRecipe.setInstructions(convertInstructionsRecipeDTOLists(dbRecipe.getInstructions(), recipeData.getInstructions(), id, user));
 		
 		for (RecipeAmount recipeAmount: dbRecipe.getIngredients()) {
+			System.out.println(recipeAmount.getAmount().getIngredient().getId());
 			recipeAmountDao.updateRecipeAmount(recipeAmount);
 			recipeAmount.getAmount().setIngredient(ingredientsDao.getIngredientById(recipeAmount.getAmount().getIngredient().getId()));
 		}
@@ -124,6 +131,12 @@ public class RecipeService {
 		Recipe dbRecipe;
 		try {
 			dbRecipe = recipeDao.getRecipeById(id);
+			
+			List<UserFavorites> favs = userFavsDao.getUserFavoritesByRecipeId(id);
+			
+			for (UserFavorites u: favs) {
+				userFavsDao.deleteUserFavorites(u.getId());
+			}
 			
 			for (RecipeAmount recipeAmount: dbRecipe.getIngredients()) {
 				recipeAmountDao.deleteRecipeAmount(recipeAmount.getId());
@@ -191,7 +204,9 @@ public class RecipeService {
 			
 			if (i < dbRecipeAmounts.size()) {
 				dbRecipeAmounts.get(i).getAmount().setAmount(recipeAmounts.get(i).getAmount().getAmount());
-				dbRecipeAmounts.get(i).getAmount().getIngredient().setId(recipeAmounts.get(i).getAmount().getIngredient().getId());
+				Ingredients ingredient = new Ingredients();
+				ingredient.setId(recipeAmounts.get(i).getAmount().getIngredient().getId());
+				dbRecipeAmounts.get(i).getAmount().setIngredient(ingredient);
 				dbRecipeAmounts.get(i).getAmount().setLastUpdateDate(today);
 				dbRecipeAmounts.get(i).getAmount().setLastUpdatedBy(user);
 			} else {

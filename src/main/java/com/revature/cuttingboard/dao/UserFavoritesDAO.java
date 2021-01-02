@@ -32,6 +32,20 @@ public class UserFavoritesDAO {
 		}
 	} 
 	
+	@SuppressWarnings("unchecked")
+	public List<UserFavorites> getUserFavoritesByRecipeId(int id) throws Exception {
+		try (Session session = HibernateUtility.getSession()) {
+			Transaction tx = session.beginTransaction();
+			String query = "FROM UserFavorites u WHERE u.recipe.id = :id";
+			List<UserFavorites> shoppingList = (List<UserFavorites>) session.createQuery(query).setParameter("id",  id).list();
+			tx.commit();
+			return shoppingList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("PSQL Error");
+		}
+	} 
+	
 	public UserFavorites insertUserFavorites(UserFavorites userFavorites) throws Exception {
 		try (Session session = HibernateUtility.getSession()) {
 			Transaction tx = session.beginTransaction();
