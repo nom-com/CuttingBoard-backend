@@ -20,7 +20,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class TokenUtility {
 	
-	private String SECRET_KEY = "secret";
+	private String SECRET_KEY = System.getenv("TOKEN_SECRETS");
 
     public String createJWT(String id, String issuer, String subject, long ttlMillis) {
 
