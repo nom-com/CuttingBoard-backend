@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.cuttingboard.annotation.AuthenticatedEndpoint;
 import com.revature.cuttingboard.dto.UserFavoritesDTO;
 import com.revature.cuttingboard.model.SystemUser;
-import com.revature.cuttingboard.model.UserFavorites;
 import com.revature.cuttingboard.service.UserFavoritesService;
 
 /**

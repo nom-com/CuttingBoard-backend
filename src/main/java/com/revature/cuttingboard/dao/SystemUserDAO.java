@@ -20,7 +20,6 @@ import com.revature.cuttingboard.utils.HibernateUtility;
  */
 
 @Repository
-@SuppressWarnings("unchecked")
 public class SystemUserDAO {
 	
 	
