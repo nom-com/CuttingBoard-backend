@@ -71,4 +71,20 @@ public class UserFavoritesDAO {
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	public boolean deleteUserFavoritesByRecipe(int id, int userId) throws Exception {
+		try (Session session = HibernateUtility.getSession()) {
+			Transaction tx = session.beginTransaction();
+			UserFavorites userFavorites = (UserFavorites) session.createQuery("FROM UserFavorites u WHERE u.recipe.id = :rid AND u.systemUser.id = :uid")
+					.setParameter("rid", id)
+					.setParameter("uid", userId)
+					.getSingleResult();
+			session.delete(userFavorites);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
 }
