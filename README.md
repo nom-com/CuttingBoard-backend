@@ -5,6 +5,8 @@ This project will act as the backend for the Cutting Board web application. This
 
 This application allow users to find new favorite recipes, as well as share their own with the community. 
 
+A public version of this API can be accessed at http://api.generictech.org.
+
 # Endpoints
 ## Base URL
 The base URL to interact with this API should follow the following convention:
