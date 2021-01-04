@@ -606,10 +606,16 @@ A request to this endpoint should return an HTTP status of 200 and a JSON body s
 ```
 ```
 
->DELETE /favorites/{id}
+> DELETE /favorites/{id}
 
-A request to this endpoint should contain a number (the id of the recipe) in place of {id} such as the following:
+A request to this endpoint should contain a number (the id of the user favorite) in place of {id} such as the following:
 
 http://localhost:8080/cuttingboard/favrites/1
 
 A correct response should return an HTTP status of 204 and an empty response body.
+
+> DELTE /favorites/recipe/{id}
+
+A request to this endpoint will delete a favorite listing based upon the combination of the user id and the recipe id provided in the URI. 
+
+A successful response will be a status code 204.

@@ -57,4 +57,8 @@ public class UserFavoritesService {
 		return userFavsDao.deleteUserFavorites(id);
 	}
 	
+	public boolean deleteUserFavoritesByRecipe(int id, SystemUser user) throws Exception {
+		return userFavsDao.deleteUserFavoritesByRecipe(id, user.getId());
+	}
+	
 }
