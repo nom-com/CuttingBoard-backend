@@ -69,4 +69,16 @@ public class UserFavoritesController {
 			return null;
 		}
 	}
+	
+	@DeleteMapping("/recipe/{id}")
+	@AuthenticatedEndpoint
+	public void deleteUserFavoritesByRecipe(@PathVariable("id") int id, SystemUser user) {
+		try {
+			resp.setStatus(204);
+			userFavService.deleteUserFavoritesByRecipe(id, user);
+		} catch (Exception e) {
+			resp.setStatus(400);
+			e.printStackTrace();
+		}
+	}
 }
