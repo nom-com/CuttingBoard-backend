@@ -604,7 +604,6 @@ A request to this endpoint should return an HTTP status of 200 and a JSON body s
     }
 ]
 ```
-```
 
 > DELETE /favorites/{id}
 
