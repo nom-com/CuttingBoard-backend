@@ -9,7 +9,7 @@ import com.revature.cuttingboard.dao.SystemUserDAO;
 import com.revature.cuttingboard.dto.SystemUserDTO;
 import com.revature.cuttingboard.exception.EmailAlreadyExists;
 import com.revature.cuttingboard.exception.EmailNotFound;
-import com.revature.cuttingboard.exception.UserAlreadyExists;
+import com.revature.cuttingboard.exception.UsernameAlreadyExists;
 import com.revature.cuttingboard.exception.UserNotFound;
 import com.revature.cuttingboard.model.SystemUser;
 import com.revature.cuttingboard.utils.PasswordHashingUtility;
@@ -53,7 +53,7 @@ public class SystemUserService {
 	private boolean checkUsername(String user) throws Exception {
 		try {
 			systemUserDao.getUserByUsername(user);
-			throw new UserAlreadyExists();
+			throw new UsernameAlreadyExists();
 		} catch (UserNotFound e) {
 			return true;
 		}
